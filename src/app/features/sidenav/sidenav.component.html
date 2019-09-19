@@ -1,0 +1,27 @@
+<mat-sidenav-container>
+  <mat-sidenav mode="side" opened>
+    <mat-list>
+      <mat-list-item
+        *ngFor="let item of items"
+        class="route-link"
+        [routerLink]="item.route"
+        routerLinkActive="route-link--active"
+      >
+        <button
+          mat-icon-button
+          [matTooltip]="item.tooltip"
+          matTooltipPosition="after"
+        >
+          <mat-icon
+            [ngClass]="item.icon"
+            inline
+          ></mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

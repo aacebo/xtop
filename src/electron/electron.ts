@@ -4,9 +4,11 @@ import { app, BrowserWindow, screen } from 'electron';
 import * as url from 'url';
 import * as dev from 'electron-is-dev';
 
+import { Processes } from './processes';
+
 let window: BrowserWindow;
 
-function newWindow(): void {
+function newWindow() {
   window = new BrowserWindow({
     height: screen.getPrimaryDisplay().size.height / 2,
     width: 800,
@@ -16,6 +18,7 @@ function newWindow(): void {
     resizable: true,
     alwaysOnTop: false,
     skipTaskbar: false,
+    titleBarStyle: 'hiddenInset',
     webPreferences: {
       nodeIntegration: true,
       backgroundThrottling: false,
@@ -34,9 +37,8 @@ function newWindow(): void {
   }
 
   window.on('closed', () => window = null);
-  // window.webContents.on('dom-ready', () => {
-  //   window.webContents.send('os', getSystemInfo());
-  // });
+
+  Processes.register(window);
 }
 
 app.on('ready', () => {

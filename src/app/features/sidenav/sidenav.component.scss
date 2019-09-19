@@ -1,0 +1,15 @@
+mat-sidenav-container {
+  height: 100%;
+}
+
+mat-list {
+  margin-top: 20px;
+}
+
+.route-link {
+  color: grey !important;
+
+  &.route-link--active {
+    color: white !important;
+  }
+}

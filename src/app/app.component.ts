@@ -1,5 +1,7 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 
+import { ISidenavItem } from './features/sidenav';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,6 +9,11 @@ import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit {
+  readonly navItems: ISidenavItem[] = [
+    { icon: 'fas fa-stream', tooltip: 'Processes', route: '/processes' },
+    { icon: 'fas fa-memory', tooltip: 'Memory', route: '/memory' }
+  ];
+
   ngOnInit() {
     document.body.classList.add('dark--theme');
   }
