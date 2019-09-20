@@ -33,7 +33,7 @@
         "allow-pascal-case"
       ]
     },
-    "interface-name": false,
+    "interface-name": [true, "always-prefix"],
     "max-classes-per-file": false,
     "max-line-length": [
       true,

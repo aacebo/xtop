@@ -1,1 +1,4 @@
-<div>processes</div>
+<app-tree-table
+  [cols]="columns"
+  [rows]="process.entities$ | async"
+></app-tree-table>
