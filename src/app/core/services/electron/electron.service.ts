@@ -38,11 +38,11 @@ export class ElectronService {
     this._remote.Menu.setApplicationMenu(this._remote.Menu.buildFromTemplate(options));
   }
 
-  send(name: string, data?: any) {
+  send<T = any>(name: string, data?: T) {
     this._renderer.send(name, data);
   }
 
-  copy(data: any) {
+  copy<T = any>(data: T) {
     this._remote.clipboard.write(data);
   }
 
@@ -53,10 +53,10 @@ export class ElectronService {
     });
   }
 
-  on(name: string, callback: any): void {
+  on(name: string, cb: (...args) => void) {
     this._renderer.on(name, (e: Event, data: any) => {
       this._ngZone.run(() => {
-        callback(data);
+        cb(data);
       });
     });
   }

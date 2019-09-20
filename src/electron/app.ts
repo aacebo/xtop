@@ -50,6 +50,12 @@ export class App {
       },
     });
 
+    this._window.webContents.on('dom-ready', () => {
+      this._window.webContents.send('system', {
+        platform: process.platform
+      });
+    });
+
     this._window.loadURL(url.format({
       pathname: `${__dirname}/../xtop/index.html`,
       protocol: 'file:',
@@ -61,10 +67,17 @@ export class App {
       this._window.webContents.openDevTools();
     }
 
-    this._window.on('closed', () => window = null);
+    this._window.on('closed', () => {
+      Processes.unregister();
+      this._window = null;
+    });
 
     Processes.register(ps => {
       this._window.webContents.send('processes', ps);
     });
+  }
+
+  deconscructor() {
+    Processes.unregister();
   }
 }

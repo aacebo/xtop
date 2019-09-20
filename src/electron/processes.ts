@@ -12,6 +12,12 @@ export class Processes {
     ipcMain.on('processes.unsubscribe', this._unsubscribe.bind(this));
   }
 
+  static unregister() {
+    this._unsubscribe();
+    ipcMain.removeAllListeners('processes.subscribe');
+    ipcMain.removeAllListeners('processes.subscribe');
+  }
+
   private static async _subscribe() {
     this._cb(await this._getProcesses());
 
