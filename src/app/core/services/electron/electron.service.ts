@@ -1,0 +1,63 @@
+import { Injectable, NgZone } from '@angular/core';
+import {
+  BrowserWindow,
+  IpcRenderer,
+  Remote,
+  MenuItemConstructorOptions,
+  App,
+} from 'electron';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class ElectronService {
+  readonly app: App;
+  readonly window: BrowserWindow;
+
+  private readonly _renderer: IpcRenderer;
+  private readonly _remote: Remote;
+
+  get clipboard() {
+    return this._remote.clipboard;
+  }
+
+  get BrowserWindow() {
+    return this._remote.BrowserWindow;
+  }
+
+  constructor(private readonly _ngZone: NgZone) {
+    const { ipcRenderer, remote, app } = window.require('electron');
+
+    this.window = remote.getCurrentWindow();
+    this._renderer = ipcRenderer;
+    this._remote = remote;
+    this.app = app;
+  }
+
+  setMenu(options: Array<MenuItemConstructorOptions>) {
+    this._remote.Menu.setApplicationMenu(this._remote.Menu.buildFromTemplate(options));
+  }
+
+  send(name: string, data?: any) {
+    this._renderer.send(name, data);
+  }
+
+  copy(data: any) {
+    this._remote.clipboard.write(data);
+  }
+
+  notification(title: string, body: string) {
+    return new this._remote.Notification({
+      title,
+      body,
+    });
+  }
+
+  on(name: string, callback: any): void {
+    this._renderer.on(name, (e: Event, data: any) => {
+      this._ngZone.run(() => {
+        callback(data);
+      });
+    });
+  }
+}

@@ -1,19 +1,21 @@
-import { BrowserWindow, ipcMain } from 'electron';
+import { BrowserWindow, ipcMain, EventEmitter } from 'electron';
 import * as psList from 'ps-list';
 
 export class Processes {
   private static _timer: NodeJS.Timer;
-  private static _window: BrowserWindow;
+  private static _cb: (ps: psList.ProcessDescriptor[]) => void;
 
-  static register(window: BrowserWindow) {
-    this._window = window;
-    ipcMain.on('subscribe-processes', this._subscribe.bind(this));
-    ipcMain.on('unsubscribe-processes', this._unsubscribe.bind(this));
+  static register(cb: (ps: psList.ProcessDescriptor[]) => void) {
+    this._cb = cb;
+    ipcMain.on('processes.subscribe', this._subscribe.bind(this));
+    ipcMain.on('processes.unsubscribe', this._unsubscribe.bind(this));
   }
 
-  private static _subscribe() {
+  private static async _subscribe() {
+    this._cb(await psList());
+
     this._timer = setInterval(async () => {
-      this._window.webContents.send('processes', await psList());
+      this._cb(await psList());
     }, 5000);
   }
 
