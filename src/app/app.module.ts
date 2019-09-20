@@ -11,8 +11,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { ResourcesModule } from './resources';
-import { SidenavModule } from './features/sidenav';
 import { environment } from '../environments/environment';
+import { SidenavModule } from './features/sidenav';
+import { ToolbarModule } from './features/toolbar';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,6 +31,7 @@ import { environment } from '../environments/environment';
     AppRoutingModule,
     ResourcesModule,
     SidenavModule,
+    ToolbarModule,
   ],
 })
 export class AppModule { }

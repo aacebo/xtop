@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   ];
 
   constructor(
-    private readonly _system: SystemService,
+    readonly system: SystemService,
     private readonly _electron: ElectronService,
   ) { }
 
@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
     document.body.classList.add('dark--theme');
 
     this._electron.on('system', (sys: ISystem) => {
-      this._system.add(sys);
+      this.system.add(sys);
     });
   }
 }

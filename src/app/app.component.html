@@ -1,3 +1,4 @@
+<app-toolbar *ngIf="system.isMac$ | async"></app-toolbar>
 <app-sidenav [items]="navItems">
   <router-outlet></router-outlet>
 </app-sidenav>
