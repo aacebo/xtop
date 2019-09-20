@@ -29,7 +29,7 @@ export class App {
   constructor() {
     if (dev && process.env.REDUX_EXTENSION_LOCATION) {
       BrowserWindow.addDevToolsExtension(
-        path.join(os.homedir(), process.env.REDUX_EXTENSION_LOCATION)
+        path.join(os.homedir(), process.env.REDUX_EXTENSION_LOCATION),
       );
     }
 
@@ -52,7 +52,7 @@ export class App {
 
     this._window.webContents.on('dom-ready', () => {
       this._window.webContents.send('system', {
-        platform: process.platform
+        platform: process.platform,
       });
     });
 

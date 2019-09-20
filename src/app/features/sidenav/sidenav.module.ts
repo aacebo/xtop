@@ -17,6 +17,6 @@ import { SidenavComponent } from './sidenav.component';
     MatButtonModule,
     MatListModule,
     MatTooltipModule,
-  ]
+  ],
 })
 export class SidenavModule { }

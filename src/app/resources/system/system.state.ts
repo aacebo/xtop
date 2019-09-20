@@ -9,6 +9,6 @@ export interface ISystemState {
 
 export function reducers(state: ISystemState, action: Action) {
   return combineReducers<ISystemState>({
-    system: fromReducers.systemReducer
+    system: fromReducers.systemReducer,
   })(state, action);
 }

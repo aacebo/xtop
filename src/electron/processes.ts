@@ -35,7 +35,7 @@ export class Processes {
   private static async _getProcesses() {
     return arrayToTree(await psList(), {
       parentProperty: 'ppid',
-      customID: 'pid'
+      customID: 'pid',
     });
   }
 }

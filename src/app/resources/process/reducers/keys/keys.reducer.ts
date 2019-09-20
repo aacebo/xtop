@@ -4,5 +4,5 @@ import * as actions from '../../actions';
 
 export const keysReducer = createReducer<number[]>(
   [],
-  on(actions.add, (_, action) => action.processes.map(p => p.pid))
+  on(actions.add, (_, action) => action.processes.map(p => p.pid)),
 );

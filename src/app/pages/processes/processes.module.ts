@@ -8,7 +8,7 @@ import { ProcessesComponent } from './processes.component';
   declarations: [ProcessesComponent],
   imports: [
     CommonModule,
-    ProcessesRoutingModule
-  ]
+    ProcessesRoutingModule,
+  ],
 })
 export class ProcessesModule { }

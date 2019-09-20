@@ -10,13 +10,13 @@ const routes: Routes = [
     loadChildren: () => import('./pages/processes/processes.module').then(v => v.ProcessesModule),
     resolve: {
       subscription: SubscriptionResolver,
-    }
-  }
+    },
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [SubscriptionResolver]
+  providers: [SubscriptionResolver],
 })
 export class AppRoutingModule { }

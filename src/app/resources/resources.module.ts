@@ -7,6 +7,6 @@ import { SystemModule } from './system';
   imports: [
     ProcessModule,
     SystemModule,
-  ]
+  ],
 })
 export class ResourcesModule { }

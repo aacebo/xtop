@@ -5,5 +5,5 @@ import * as actions from '../../system.actions';
 
 export const systemReducer = createReducer<ISystem>(
   undefined,
-  on(actions.add, (_, action) => action.system)
+  on(actions.add, (_, action) => action.system),
 );

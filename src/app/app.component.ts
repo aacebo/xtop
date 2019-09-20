@@ -8,12 +8,12 @@ import { SystemService, ISystem } from './resources/system';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
   readonly navItems: ISidenavItem[] = [
     { icon: 'fas fa-stream', tooltip: 'Processes', route: '/processes' },
-    { icon: 'fas fa-memory', tooltip: 'Memory', route: '/memory' }
+    { icon: 'fas fa-memory', tooltip: 'Memory', route: '/memory' },
   ];
 
   constructor(

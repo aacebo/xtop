@@ -5,7 +5,7 @@ import { reducers } from './system.state';
 
 @NgModule({
   imports: [
-    StoreModule.forFeature('system', reducers)
-  ]
+    StoreModule.forFeature('system', reducers),
+  ],
 })
 export class SystemModule { }

@@ -24,12 +24,12 @@ import { environment } from '../environments/environment';
     StoreModule.forRoot({ }),
     StoreDevtoolsModule.instrument({
       logOnly: environment.production,
-      maxAge: 20
+      maxAge: 20,
     }),
 
     AppRoutingModule,
     ResourcesModule,
-    SidenavModule
-  ]
+    SidenavModule,
+  ],
 })
 export class AppModule { }

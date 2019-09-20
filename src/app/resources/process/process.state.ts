@@ -11,6 +11,6 @@ export interface IProcessState {
 export function reducers(state: IProcessState, action: Action) {
   return combineReducers<IProcessState>({
     keys: fromReducers.keysReducer,
-    map: fromReducers.mapReducer
+    map: fromReducers.mapReducer,
   })(state, action);
 }

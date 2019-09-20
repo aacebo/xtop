@@ -13,5 +13,5 @@ export const mapReducer = createReducer<{ [key: number]: IProcess }>(
     }
 
     return map;
-  })
+  }),
 );

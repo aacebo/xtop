@@ -5,7 +5,7 @@ import { reducers } from './process.state';
 
 @NgModule({
   imports: [
-    StoreModule.forFeature('process', reducers)
+    StoreModule.forFeature('process', reducers),
   ],
 })
 export class ProcessModule { }

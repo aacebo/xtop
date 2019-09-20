@@ -7,7 +7,7 @@ import { ProcessService, IProcess } from '../../resources/process';
   selector: 'app-processes',
   templateUrl: './processes.component.html',
   styleUrls: ['./processes.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProcessesComponent implements OnInit {
   constructor(
