@@ -1,6 +1,7 @@
-import { Component, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 
 import { ElectronService } from '../../core/services';
+import { ProcessService, IProcess } from '../../resources/process';
 
 @Component({
   selector: 'app-processes',
@@ -8,18 +9,15 @@ import { ElectronService } from '../../core/services';
   styleUrls: ['./processes.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProcessesComponent implements OnInit, OnDestroy {
-  constructor(private readonly _electron: ElectronService) { }
+export class ProcessesComponent implements OnInit {
+  constructor(
+    readonly process: ProcessService,
+    private readonly _electron: ElectronService,
+  ) { }
 
   ngOnInit() {
-    this._electron.on('processes', ps => {
-      console.log(ps);
+    this._electron.on('processes', (ps: IProcess[]) => {
+      this.process.add(ps);
     });
-
-    this._electron.send('processes.subscribe');
-  }
-
-  ngOnDestroy() {
-    this._electron.send('processes.unsubscribe');
   }
 }

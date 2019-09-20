@@ -2,6 +2,8 @@ import { BrowserWindow, screen } from 'electron';
 
 import * as url from 'url';
 import * as dev from 'electron-is-dev';
+import * as os from 'os';
+import * as path from 'path';
 
 import { Processes } from './processes';
 
@@ -25,6 +27,12 @@ export class App {
   }
 
   constructor() {
+    if (dev && process.env.REDUX_EXTENSION_LOCATION) {
+      BrowserWindow.addDevToolsExtension(
+        path.join(os.homedir(), process.env.REDUX_EXTENSION_LOCATION)
+      );
+    }
+
     this._window = new BrowserWindow({
       height: screen.getPrimaryDisplay().size.height / 2,
       width: screen.getPrimaryDisplay().size.width / 2,

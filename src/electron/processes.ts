@@ -1,5 +1,6 @@
-import { BrowserWindow, ipcMain, EventEmitter } from 'electron';
+import { ipcMain } from 'electron';
 import * as psList from 'ps-list';
+import * as arrayToTree from 'array-to-tree';
 
 export class Processes {
   private static _timer: NodeJS.Timer;
@@ -12,10 +13,10 @@ export class Processes {
   }
 
   private static async _subscribe() {
-    this._cb(await psList());
+    this._cb(await this._getProcesses());
 
     this._timer = setInterval(async () => {
-      this._cb(await psList());
+      this._cb(await this._getProcesses());
     }, 5000);
   }
 
@@ -23,5 +24,12 @@ export class Processes {
     this._timer.unref();
     clearInterval(this._timer);
     this._timer = undefined;
+  }
+
+  private static async _getProcesses() {
+    return arrayToTree(await psList(), {
+      parentProperty: 'ppid',
+      customID: 'pid'
+    });
   }
 }

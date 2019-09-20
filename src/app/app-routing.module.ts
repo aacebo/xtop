@@ -1,13 +1,22 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { SubscriptionResolver } from './core/resolvers/subscription';
+
 const routes: Routes = [
   { path: '', redirectTo: 'processes', pathMatch: 'full' },
-  { path: 'processes', loadChildren: () => import('./pages/processes/processes.module').then(v => v.ProcessesModule) }
+  {
+    path: 'processes',
+    loadChildren: () => import('./pages/processes/processes.module').then(v => v.ProcessesModule),
+    resolve: {
+      subscription: SubscriptionResolver,
+    }
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [SubscriptionResolver]
 })
 export class AppRoutingModule { }
