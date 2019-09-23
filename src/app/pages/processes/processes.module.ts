@@ -3,14 +3,14 @@ import { CommonModule } from '@angular/common';
 
 import { ProcessesRoutingModule } from './processes-routing.module';
 import { ProcessesComponent } from './processes.component';
-import { TreeTableModule } from '../../features/tree-table';
+import { ProcessTableModule } from '../../features/process-table';
 
 @NgModule({
   declarations: [ProcessesComponent],
   imports: [
     CommonModule,
     ProcessesRoutingModule,
-    TreeTableModule,
+    ProcessTableModule,
   ],
 })
 export class ProcessesModule { }

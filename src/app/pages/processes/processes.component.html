@@ -1,4 +1,3 @@
-<app-tree-table
-  [cols]="columns"
-  [rows]="process.entities$ | async"
-></app-tree-table>
+<app-process-table
+  [processes]="process.entities$ | async"
+></app-process-table>
