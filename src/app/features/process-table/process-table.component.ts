@@ -1,5 +1,5 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
-import { ColumnMode, SelectionType } from '@swimlane/ngx-datatable';
+import { Component, ChangeDetectionStrategy, Input, ViewChild } from '@angular/core';
+import { ColumnMode, SelectionType, DatatableComponent } from '@swimlane/ngx-datatable';
 
 import { IProcess } from '../../resources/process';
 
@@ -13,6 +13,8 @@ export class ProcessTableComponent {
   @Input() processes: IProcess[] = [];
   @Input() isMac = false;
 
+  @ViewChild(DatatableComponent, { static: false }) ngxDatatable: DatatableComponent;
+
   readonly ColumnMode = ColumnMode;
   readonly SelectionType = SelectionType;
 
@@ -20,5 +22,9 @@ export class ProcessTableComponent {
 
   onSelect(e: { selected: IProcess[] }) {
     this.selected = e.selected;
+  }
+
+  onScrollTop() {
+    this.ngxDatatable.bodyComponent.updateOffsetY(0);
   }
 }

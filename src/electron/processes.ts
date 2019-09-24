@@ -1,6 +1,5 @@
 import { ipcMain } from 'electron';
 import * as cp from 'child_process';
-import * as Parser from 'table-parser';
 
 export class Processes {
   private static _timer: NodeJS.Timer;
@@ -58,25 +57,30 @@ export class Processes {
       }
     }
 
-    cp.exec(cmd, (err, stdout) => {
+    cp.exec(`${cmd} | sed 's/  */ /g'`, (err, stdout) => {
       if (err) {
         console.error(err);
         return;
       }
 
-      const data: any[] = Parser.parse(stdout);
+      const lines = stdout.split('\n');
+      lines.shift();
+      const data = [];
 
-      this._cb(data.map(o => {
-        const map = {};
+      for (const line of lines) {
+        if (line) {
+          const map: any = { };
+          const args = line.trim().split(' ', this._columns.length);
 
-        for (const key in o) {
-          if (o.hasOwnProperty(key)) {
-            map[key] = isNaN(+o[key][0]) ? o[key][0] : +o[key][0];
+          for (let i = 0; i < this._columns.length; i++) {
+            map[this._columns[i].label] = isNaN(+args[i]) ? args[i] : +args[i];
           }
-        }
 
-        return map;
-      }));
+          data.push(map);
+        }
+      }
+
+      this._cb(data);
     });
   }
 }

@@ -14,6 +14,8 @@
         >
           <mat-icon
             [ngClass]="item.icon"
+            [matBadge]="item.badge ? (item.badge | async) : null"
+            matBadgeColor="accent"
             inline
           ></mat-icon>
         </button>

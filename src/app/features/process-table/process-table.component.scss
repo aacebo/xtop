@@ -7,6 +7,17 @@ $padding: 5px;
   display: block;
   height: 100%;
 
+  .scroll-top-button {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    opacity: 0.5;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
   ngx-datatable {
     height: 100%;
 
@@ -22,12 +33,17 @@ $padding: 5px;
         user-select: none;
         border-right: $border;
         padding: $padding;
+
+        &:last-child {
+          border-right: none;
+        }
       }
     }
 
     ::ng-deep .datatable-body-row {
       user-select: none;
       cursor: default;
+      color: rgba(255, 255, 255, 0.7);
 
       &.active {
         background-color: $amber;

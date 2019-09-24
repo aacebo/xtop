@@ -85,3 +85,16 @@
     </ng-template>
   </ngx-datatable-column>
 </ngx-datatable>
+
+<button
+  *ngIf="ngxDatatable?.offset > 0"
+  mat-mini-fab
+  class="scroll-top-button"
+  color="accent"
+  (click)="onScrollTop()"
+>
+  <mat-icon
+    class="fas fa-arrow-up"
+    inline
+  ></mat-icon>
+</button>

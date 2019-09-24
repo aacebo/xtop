@@ -3,6 +3,7 @@ import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { ISidenavItem } from './features/sidenav';
 import { ElectronService } from './core/services';
 import { SystemService, ISystem } from './resources/system';
+import { ProcessService } from './resources/process';
 
 @Component({
   selector: 'app-root',
@@ -12,12 +13,13 @@ import { SystemService, ISystem } from './resources/system';
 })
 export class AppComponent implements OnInit {
   readonly navItems: ISidenavItem[] = [
-    { icon: 'fas fa-stream', tooltip: 'Processes', route: '/processes' },
+    { icon: 'fas fa-stream', tooltip: 'Processes', route: '/processes', badge: this._process.count$ },
     { icon: 'fas fa-memory', tooltip: 'Memory', route: '/memory' },
   ];
 
   constructor(
     readonly system: SystemService,
+    private readonly _process: ProcessService,
     private readonly _electron: ElectronService,
   ) { }
 

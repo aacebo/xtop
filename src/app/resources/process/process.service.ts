@@ -15,12 +15,14 @@ export class ProcessService {
   readonly keys$: Observable<number[]>;
   readonly map$: Observable<{ [pid: number]: IProcess }>;
   readonly entities$: Observable<IProcess[]>;
+  readonly count$: Observable<number>;
 
   constructor(private readonly _store: Store<IProcessState>) {
     this.state$ = this._store.pipe(select(selectors.selectState));
     this.keys$ = this._store.pipe(select(selectors.selectKeys));
     this.map$ = this._store.pipe(select(selectors.selectMap));
     this.entities$ = this._store.pipe(select(selectors.selectEntities));
+    this.count$ = this._store.pipe(select(selectors.selectCount));
   }
 
   add(processes: IProcess[]) {
