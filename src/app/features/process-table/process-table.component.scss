@@ -50,6 +50,10 @@ $padding: 5px;
         color: black;
       }
 
+      &:hover {
+        filter: brightness(120%);
+      }
+
       ::ng-deep .datatable-body-cell {
         padding: $padding;
       }
