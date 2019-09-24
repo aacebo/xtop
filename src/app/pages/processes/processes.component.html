@@ -1,3 +1,4 @@
 <app-process-table
   [processes]="process.entities$ | async"
+  [isMac]="system.isMac$ | async"
 ></app-process-table>

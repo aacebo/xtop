@@ -11,9 +11,14 @@ import { IProcess } from '../../resources/process';
 })
 export class ProcessTableComponent {
   @Input() processes: IProcess[] = [];
+  @Input() isMac = false;
 
   readonly ColumnMode = ColumnMode;
   readonly SelectionType = SelectionType;
 
   selected: IProcess[] = [];
+
+  onSelect(e: { selected: IProcess[] }) {
+    this.selected = e.selected;
+  }
 }

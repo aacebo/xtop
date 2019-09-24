@@ -2,6 +2,7 @@ import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 
 import { ElectronService } from '../../core/services';
 import { ProcessService, IProcess } from '../../resources/process';
+import { SystemService } from '../../resources/system';
 
 @Component({
   selector: 'app-processes',
@@ -12,6 +13,7 @@ import { ProcessService, IProcess } from '../../resources/process';
 export class ProcessesComponent implements OnInit {
   constructor(
     readonly process: ProcessService,
+    readonly system: SystemService,
     private readonly _electron: ElectronService,
   ) { }
 

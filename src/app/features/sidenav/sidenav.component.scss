@@ -1,9 +1,15 @@
 mat-sidenav-container {
   height: 100%;
+
+  mat-sidenav-content {
+    overflow-y: hidden;
+  }
 }
 
 mat-list {
-  margin-top: 20px;
+  &.mac {
+    margin-top: 20px;
+  }
 }
 
 .route-link {

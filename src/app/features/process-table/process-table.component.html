@@ -1,51 +1,87 @@
 <ngx-datatable
-  class="dark fullscreen"
-  [headerHeight]="50"
+  class="fullscreen"
+  trackByProp="pid"
+  [class.mac]="isMac"
+  [headerHeight]="30"
   [footerHeight]="0"
-  [rowHeight]="50"
+  [rowHeight]="30"
   [columnMode]="ColumnMode.force"
   [scrollbarV]="true"
   [scrollbarH]="true"
   [rows]="processes"
   [limit]="5"
+  [selectionType]="SelectionType.multi"
   [selected]="selected"
-  [selectionType]="SelectionType.checkbox"
-  [selectAllRowsOnPage]="false"
+  (select)="onSelect($event)"
 >
   <ngx-datatable-column
-    name="PID"
+    name="ID"
     prop="pid"
     width="80"
     [sortable]="true"
-    [headerCheckboxable]="true"
-    [checkboxable]="true"
+    [frozenLeft]="true"
   ></ngx-datatable-column>
 
   <ngx-datatable-column
     name="User"
-    prop="ruser"
-    width="300"
+    prop="user"
+    width="80"
     [sortable]="true"
   ></ngx-datatable-column>
 
   <ngx-datatable-column
     name="Name"
-    prop="comm"
-    width="300"
+    prop="name"
+    width="100"
     [sortable]="true"
   ></ngx-datatable-column>
 
   <ngx-datatable-column
     name="CPU %"
     prop="cpu"
-    width="300"
+    width="80"
     [sortable]="true"
   ></ngx-datatable-column>
 
   <ngx-datatable-column
     name="Memory %"
     prop="mem"
-    width="300"
+    width="80"
     [sortable]="true"
   ></ngx-datatable-column>
+
+  <ngx-datatable-column
+    name="Priority"
+    prop="priority"
+    width="80"
+    [sortable]="true"
+  ></ngx-datatable-column>
+
+  <ngx-datatable-column
+    name="RSS"
+    prop="rss"
+    width="80"
+    [sortable]="true"
+  >
+    <ng-template
+      ngx-datatable-cell-template
+      let-v="value"
+    >
+      {{ v | bytesToString }}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column
+    name="VSZ"
+    prop="vsz"
+    width="80"
+    [sortable]="true"
+  >
+    <ng-template
+      ngx-datatable-cell-template
+      let-v="value"
+    >
+      {{ v | bytesToString }}
+    </ng-template>
+  </ngx-datatable-column>
 </ngx-datatable>

@@ -1,9 +1,25 @@
 import { ipcMain } from 'electron';
 import * as cp from 'child_process';
+import * as Parser from 'table-parser';
 
 export class Processes {
   private static _timer: NodeJS.Timer;
   private static _cb: (ps: any[]) => void;
+  private static _columns = [
+    { key: 'pid', label: 'pid' },
+    { key: 'ppid', label: 'ppid' },
+    { key: 'uid', label: 'uid' },
+    { key: 'ruser', label: 'user' },
+    { key: 'tty', label: 'tty' },
+    { key: 'vsz', label: 'vsz' },
+    { key: 'rss', label: 'rss' },
+    { key: '%cpu', label: 'cpu' },
+    { key: '%mem', label: 'mem' },
+    { key: 'etime', label: 'etime' },
+    { key: 'pri', label: 'priority' },
+    { key: 'comm', label: 'name' },
+    { key: 'command', label: 'command' },
+  ];
 
   static register(cb: (ps: any[]) => void) {
     this._cb = cb;
@@ -32,30 +48,35 @@ export class Processes {
   }
 
   private static _getProcesses() {
-    cp.exec('ps -A -o pid,ppid,uid,ruser,tty,vsz,rss,%cpu,%mem,etime,pri,comm,command | sed \'s/  */ /g\'', (err, stdout) => {
+    let cmd = 'ps -A -o ';
+
+    for (let i = 0; i < this._columns.length; i++) {
+      cmd += `${this._columns[i].key}=${this._columns[i].label}`;
+
+      if (i < this._columns.length - 1) {
+        cmd += ',';
+      }
+    }
+
+    cp.exec(cmd, (err, stdout) => {
       if (err) {
         console.error(err);
         return;
       }
 
-      const lines = stdout.split('\n');
-      const cols = lines.shift().split(' ').map(c => c.replace('%', '').toLowerCase());
-      const data = [];
+      const data: any[] = Parser.parse(stdout);
 
-      for (const line of lines) {
-        const rec = {};
-        const args = line.split(' ');
+      this._cb(data.map(o => {
+        const map = {};
 
-        for (let i = 0; i < cols.length; i++) {
-          if (cols[i]) {
-            rec[cols[i]] = isNaN(+args[i]) ? args[i] : +args[i];
+        for (const key in o) {
+          if (o.hasOwnProperty(key)) {
+            map[key] = isNaN(+o[key][0]) ? o[key][0] : +o[key][0];
           }
         }
 
-        data.push(rec);
-      }
-
-      this._cb(data);
+        return map;
+      }));
     });
   }
 }

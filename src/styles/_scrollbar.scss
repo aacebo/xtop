@@ -1,0 +1,18 @@
+@import './colors';
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba($amber, 0.5);
+
+  &:hover {
+    background-color: $amber;
+  }
+}
+
+::-webkit-scrollbar-corner {
+  background-color: transparent;
+}

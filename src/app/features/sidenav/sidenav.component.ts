@@ -10,4 +10,5 @@ import { ISidenavItem } from './sidenav-item.model';
 })
 export class SidenavComponent {
   @Input() items: ISidenavItem[] = [];
+  @Input() isMac = false;
 }

@@ -1,9 +1,42 @@
+@import '../../../styles/colors';
+
+$border: 1px solid rgba(255, 255, 255, 0.1);
+$padding: 5px;
+
 :host {
   display: block;
   height: 100%;
 
   ngx-datatable {
-    top: 20px;
-    height: calc(100% - 20px);
+    height: 100%;
+
+    &.mac {
+      top: 20px;
+      height: calc(100% - 20px);
+    }
+
+    ::ng-deep .datatable-header {
+      border-bottom: $border;
+
+      ::ng-deep .datatable-header-cell {
+        user-select: none;
+        border-right: $border;
+        padding: $padding;
+      }
+    }
+
+    ::ng-deep .datatable-body-row {
+      user-select: none;
+      cursor: default;
+
+      &.active {
+        background-color: $amber;
+        color: black;
+      }
+
+      ::ng-deep .datatable-body-cell {
+        padding: $padding;
+      }
+    }
   }
 }
