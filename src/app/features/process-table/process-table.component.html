@@ -12,6 +12,7 @@
   [limit]="5"
   [selectionType]="SelectionType.multi"
   [selected]="selected"
+  [sorts]="[{ prop: 'pid', dir: 'desc' }]"
   (select)="onSelect($event)"
 >
   <ngx-datatable-column
@@ -34,7 +35,17 @@
     prop="name"
     width="100"
     [sortable]="true"
-  ></ngx-datatable-column>
+  >
+    <ng-template
+      ngx-datatable-cell-template
+      let-r="row"
+      let-v="value"
+    >
+      <div [matTooltip]="r.command">
+        {{ v }}
+      </div>
+    </ng-template>
+  </ngx-datatable-column>
 
   <ngx-datatable-column
     name="CPU %"
