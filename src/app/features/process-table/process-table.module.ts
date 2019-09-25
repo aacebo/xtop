@@ -7,6 +7,7 @@ import { ProcessTableComponent } from './process-table.component';
 
 import { BytesToStringModule } from '../bytes-to-string';
 import { ProcessSheetModule } from '../process-sheet';
+import { PriorityToStringModule } from '../priority-to-string';
 
 @NgModule({
   declarations: [ProcessTableComponent],
@@ -20,6 +21,7 @@ import { ProcessSheetModule } from '../process-sheet';
     NgxDatatableModule,
     BytesToStringModule,
     ProcessSheetModule,
+    PriorityToStringModule,
   ],
 })
 export class ProcessTableModule { }
