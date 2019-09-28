@@ -45,9 +45,20 @@ $padding: 5px;
       cursor: default;
       color: rgba(255, 255, 255, 0.7);
 
+      ::ng-deep .datatable-tree-button {
+        background: transparent;
+        border: none;
+        color: #fff;
+        outline: none;
+      }
+
       &.active {
         background-color: $amber !important;
         color: black !important;
+
+        ::ng-deep .datatable-tree-button {
+          color: #000;
+        }
       }
 
       &:hover {

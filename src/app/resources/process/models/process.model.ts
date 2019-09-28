@@ -1,3 +1,5 @@
+import { TreeStatus } from '@swimlane/ngx-datatable';
+
 export interface IProcess {
   readonly pid: number;
   readonly ppid: number;
@@ -12,4 +14,6 @@ export interface IProcess {
   readonly priority: number;
   readonly name: string;
   readonly command: string;
+
+  treeStatus?: TreeStatus;
 }

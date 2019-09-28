@@ -1,6 +1,6 @@
-import { Component, ChangeDetectionStrategy, Input, ViewChild, OnChanges, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, ViewChild, OnChanges } from '@angular/core';
 import { MatBottomSheetRef } from '@angular/material';
-import { ColumnMode, SelectionType, DatatableComponent, RowHeightCache } from '@swimlane/ngx-datatable';
+import { ColumnMode, SelectionType, DatatableComponent } from '@swimlane/ngx-datatable';
 
 import { IProcess } from '../../resources/process';
 import { ProcessSheetService, ProcessSheetComponent, ProcessSheetAction } from '../process-sheet';
@@ -26,7 +26,6 @@ export class ProcessTableComponent implements OnChanges {
 
   constructor(
     private readonly _processSheet: ProcessSheetService,
-    private readonly _cdr: ChangeDetectorRef,
   ) { }
 
   ngOnChanges() {
@@ -56,7 +55,7 @@ export class ProcessTableComponent implements OnChanges {
       e.row.treeStatus = 'collapsed';
     }
 
-    this._cdr.markForCheck();
+    this.processes = [...this.processes];
   }
 
   private _onSheetDismissed(action?: ProcessSheetAction) {

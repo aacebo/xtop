@@ -12,18 +12,17 @@
   [limit]="5"
   [selectionType]="SelectionType.multi"
   [selected]="selected"
-  [sorts]="[{ prop: 'pid', dir: 'desc' }]"
+  [sorts]="[{ prop: 'cpu', dir: 'desc' }]"
   [treeFromRelation]="'ppid'"
   [treeToRelation]="'pid'"
   (select)="onSelect($event)"
   (treeAction)="onTreeAction($event)"
 >
   <ngx-datatable-column
-    name="PID"
-    prop="pid"
-    width="80"
+    name="Name"
+    prop="name"
+    width="300"
     [sortable]="true"
-    [frozenLeft]="true"
     [isTreeColumn]="true"
   ></ngx-datatable-column>
 
@@ -33,23 +32,6 @@
     width="80"
     [sortable]="true"
   ></ngx-datatable-column>
-
-  <ngx-datatable-column
-    name="Name"
-    prop="name"
-    width="100"
-    [sortable]="true"
-  >
-    <ng-template
-      ngx-datatable-cell-template
-      let-r="row"
-      let-v="value"
-    >
-      <div [matTooltip]="r.command">
-        {{ v }}
-      </div>
-    </ng-template>
-  </ngx-datatable-column>
 
   <ngx-datatable-column
     name="CPU %"
@@ -106,6 +88,13 @@
       {{ v | bytesToString }}
     </ng-template>
   </ngx-datatable-column>
+
+  <ngx-datatable-column
+    name="PID"
+    prop="pid"
+    width="80"
+    [sortable]="true"
+  ></ngx-datatable-column>
 </ngx-datatable>
 
 <button

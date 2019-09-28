@@ -10,6 +10,7 @@ export const mapReducer = createReducer<{ [key: number]: IProcess }>(
 
     for (const process of action.processes) {
       map[process.pid] = process;
+      map[process.pid].treeStatus = 'expanded';
     }
 
     return map;
