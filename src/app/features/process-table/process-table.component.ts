@@ -1,6 +1,6 @@
-import { Component, ChangeDetectionStrategy, Input, ViewChild, OnChanges } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, ViewChild, OnChanges, ChangeDetectorRef } from '@angular/core';
 import { MatBottomSheetRef } from '@angular/material';
-import { ColumnMode, SelectionType, DatatableComponent } from '@swimlane/ngx-datatable';
+import { ColumnMode, SelectionType, DatatableComponent, RowHeightCache } from '@swimlane/ngx-datatable';
 
 import { IProcess } from '../../resources/process';
 import { ProcessSheetService, ProcessSheetComponent, ProcessSheetAction } from '../process-sheet';
@@ -24,7 +24,10 @@ export class ProcessTableComponent implements OnChanges {
 
   private _processSheetRef: MatBottomSheetRef<ProcessSheetComponent>;
 
-  constructor(private readonly _processSheet: ProcessSheetService) { }
+  constructor(
+    private readonly _processSheet: ProcessSheetService,
+    private readonly _cdr: ChangeDetectorRef,
+  ) { }
 
   ngOnChanges() {
     const pids = this.selected.map(o => o.pid);
@@ -46,8 +49,17 @@ export class ProcessTableComponent implements OnChanges {
     this.ngxDatatable.bodyComponent.updateOffsetY(0);
   }
 
+  onTreeAction(e: { rowIndex: number; row: any; }) {
+    if (e.row.treeStatus === 'collapsed') {
+      e.row.treeStatus = 'expanded';
+    } else {
+      e.row.treeStatus = 'collapsed';
+    }
+
+    this._cdr.markForCheck();
+  }
+
   private _onSheetDismissed(action?: ProcessSheetAction) {
     this._processSheetRef = undefined;
-    console.log(action);
   }
 }
