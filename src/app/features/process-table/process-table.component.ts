@@ -1,9 +1,7 @@
 import { Component, ChangeDetectionStrategy, Input, ViewChild, Output, EventEmitter } from '@angular/core';
-import { MatBottomSheetRef } from '@angular/material';
-import { ColumnMode, SelectionType, DatatableComponent, TreeStatus } from '@swimlane/ngx-datatable';
+import { ColumnMode, SelectionType, DatatableComponent, TreeStatus, ContextmenuType } from '@swimlane/ngx-datatable';
 
 import { IProcess } from '../../resources/process';
-import { ProcessSheetService, ProcessSheetComponent, ProcessSheetAction } from '../process-sheet';
 
 @Component({
   selector: 'app-process-table',
@@ -24,23 +22,12 @@ export class ProcessTableComponent {
 
   selected: IProcess[] = [];
 
-  private _processSheetRef: MatBottomSheetRef<ProcessSheetComponent>;
-
-  constructor(private readonly _processSheet: ProcessSheetService) { }
-
   getRowId(p: IProcess) {
     return p.pid;
   }
 
   onSelect(e: { selected: IProcess[] }) {
     this.selected = e.selected;
-
-    if (!this._processSheetRef) {
-      this._processSheetRef = this._processSheet.open({ selected: this.selected.length });
-      this._processSheetRef.afterDismissed().subscribe(this._onSheetDismissed.bind(this));
-    } else {
-      this._processSheetRef.instance.selected$.next(this.selected.length);
-    }
   }
 
   onScrollTop() {
@@ -61,7 +48,11 @@ export class ProcessTableComponent {
     });
   }
 
-  private _onSheetDismissed(action?: ProcessSheetAction) {
-    this._processSheetRef = undefined;
+  onContextMenu(e: { event: MouseEvent; type: ContextmenuType; content: IProcess }) {
+    if (e.type === ContextmenuType.body) {
+
+    } else {
+
+    }
   }
 }

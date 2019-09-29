@@ -18,6 +18,7 @@
   [treeToRelation]="'pid'"
   (select)="onSelect($event)"
   (treeAction)="onTreeAction($event)"
+  (tableContextmenu)="onContextMenu($event)"
 >
   <ngx-datatable-column
     name="Name"

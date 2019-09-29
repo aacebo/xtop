@@ -6,7 +6,6 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ProcessTableComponent } from './process-table.component';
 
 import { BytesToStringModule } from '../bytes-to-string';
-import { ProcessSheetModule } from '../process-sheet';
 import { PriorityToStringModule } from '../priority-to-string';
 
 @NgModule({
@@ -20,7 +19,6 @@ import { PriorityToStringModule } from '../priority-to-string';
 
     NgxDatatableModule,
     BytesToStringModule,
-    ProcessSheetModule,
     PriorityToStringModule,
   ],
 })

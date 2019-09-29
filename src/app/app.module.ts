@@ -14,7 +14,6 @@ import { ResourcesModule } from './resources';
 import { environment } from '../environments/environment';
 import { SidenavModule } from './features/sidenav';
 import { ToolbarModule } from './features/toolbar';
-import { ProcessSheetModule } from './features/process-sheet';
 
 @NgModule({
   declarations: [AppComponent],
@@ -33,7 +32,6 @@ import { ProcessSheetModule } from './features/process-sheet';
     ResourcesModule,
     SidenavModule,
     ToolbarModule,
-    ProcessSheetModule,
   ],
 })
 export class AppModule { }
