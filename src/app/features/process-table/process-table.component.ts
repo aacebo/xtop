@@ -1,8 +1,10 @@
-import { Component, ChangeDetectionStrategy, Input, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, ViewChild, Output, EventEmitter, HostListener } from '@angular/core';
 import { ColumnMode, SelectionType, DatatableComponent, TreeStatus, ContextmenuType } from '@swimlane/ngx-datatable';
+import { BehaviorSubject } from 'rxjs';
 
 import { IProcess } from '../../resources/process';
-import { ContextMenuService } from '../context-menu';
+import { ContextMenuService, IContextMenuOption } from '../context-menu';
+import { IProcessTableAction } from './process-table-action.interface';
 
 @Component({
   selector: 'app-process-table',
@@ -20,17 +22,33 @@ export class ProcessTableComponent {
 
   readonly ColumnMode = ColumnMode;
   readonly SelectionType = SelectionType;
+  readonly selected$ = new BehaviorSubject<IProcess[]>([]);
 
-  selected: IProcess[] = [];
+  private readonly actions: IProcessTableAction[] = [
+    {
+      name: 'Kill',
+      key: 'Delete',
+      cb: this._onKill.bind(this),
+    },
+    {
+      name: 'Info',
+      key: 'i',
+      ctrl: true,
+      cb: this._onInfo.bind(this),
+    },
+  ];
+
+  private get contextMenuOptions(): IContextMenuOption[] {
+    return this.actions.map(a => ({
+      text: a.name,
+      muted: `${a.ctrl ? 'Ctrl+' : ''}${a.key}`,
+    }));
+  }
 
   constructor(private readonly contextMenu: ContextMenuService) { }
 
   getRowId(p: IProcess) {
     return p.pid;
-  }
-
-  onSelect(e: { selected: IProcess[] }) {
-    this.selected = e.selected;
   }
 
   onScrollTop() {
@@ -53,9 +71,39 @@ export class ProcessTableComponent {
 
   onContextMenu(e: { event: MouseEvent; type: ContextmenuType; content: IProcess }) {
     if (e.type === ContextmenuType.body) {
-      this.contextMenu.open([{ text: 'Kill' }], e.event.x, e.event.y);
+      const ref = this.contextMenu.open(this.contextMenuOptions, e.event.x, e.event.y);
+      ref.closed.subscribe(this._onContextMenuClosed.bind(this));
     } else {
 
     }
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  onKeyDown(e: KeyboardEvent) {
+    if (e.key === 'Escape') {
+      this.selected$.next([]);
+    } else {
+      for (const a of this.actions) {
+        if (((e.ctrlKey && a.ctrl) || (!e.ctrlKey && !a.ctrl)) && e.key === a.key) {
+          a.cb();
+          return;
+        }
+      }
+    }
+  }
+
+  private _onContextMenuClosed(o: IContextMenuOption) {
+    if (o) {
+      const action = this.actions.find(a => a.name === o.text);
+      action.cb();
+    }
+  }
+
+  private _onKill() {
+    console.log('kill');
+  }
+
+  private _onInfo() {
+    console.log('info');
   }
 }

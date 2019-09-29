@@ -1,6 +1,16 @@
 <div
   class="context-menu--option"
   *ngFor="let option of options"
+  (click)="select(option)"
 >
-  {{ option.text }}
+  <div class="context-menu--option-text">
+    {{ option.text }}
+  </div>
+
+  <div
+    *ngIf="option.muted"
+    class="context-menu--option-muted"
+  >
+    {{ option.muted }}
+  </div>
 </div>

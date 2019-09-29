@@ -1,4 +1,4 @@
 export interface IContextMenuOption {
-  readonly icon?: string;
   readonly text: string;
+  readonly muted?: string;
 }

@@ -1,16 +1,43 @@
+@import '../../../styles/colors';
+
+$border-radius: 2px;
+
 :host {
   display: block;
   width: 200px;
-  color: #fff;
-  background-color: #000;
 
   .context-menu--option {
-    display: block;
+    display: flex;
     padding: 2px 5px;
+    color: #fff;
+    background-color: #000;
     cursor: pointer;
 
-    // &:hover {
+    &:hover {
+      background-color: $amber;
+      color: #000;
 
-    // }
+      .context-menu--option-muted {
+        color: rgba(0, 0, 0, 0.5);
+      }
+    }
+
+    &:first-child {
+      border-top-left-radius: $border-radius;
+      border-top-right-radius: $border-radius;
+    }
+
+    &:last-child {
+      border-bottom-left-radius: $border-radius;
+      border-bottom-right-radius: $border-radius;
+    }
+
+    .context-menu--option-text {
+      flex: 1 1 auto;
+    }
+
+    .context-menu--option-muted {
+      color: rgba(255, 255, 255, 0.5);
+    }
   }
 }

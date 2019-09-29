@@ -12,11 +12,10 @@
   [rows]="processes"
   [limit]="5"
   [selectionType]="SelectionType.multi"
-  [selected]="selected"
+  [selected]="selected$ | async"
   [sorts]="[{ prop: 'cpu', dir: 'desc' }]"
   [treeFromRelation]="'ppid'"
   [treeToRelation]="'pid'"
-  (select)="onSelect($event)"
   (treeAction)="onTreeAction($event)"
   (tableContextmenu)="onContextMenu($event)"
 >

@@ -6,6 +6,7 @@ import { take } from 'rxjs/operators';
 import { IContextMenuOption } from './context-menu-option.interface';
 import { ContextMenuComponent } from './context-menu.component';
 import { CONTEXT_MENU_OPTIONS } from './context-menu-options.constant';
+import { ContextMenuRef } from './context-menu-ref.class';
 
 @Injectable({
   providedIn: 'root',
@@ -27,21 +28,18 @@ export class ContextMenuService {
       positionStrategy: this._getPositionStrategy(x, y),
     });
 
-    const portal = new ComponentPortal(ContextMenuComponent, undefined, this._getInjector(options));
+    const cmRef = new ContextMenuRef(overlayRef);
+    const portal = new ComponentPortal(ContextMenuComponent, undefined, this._getInjector(options, cmRef));
     overlayRef.attach(portal);
-    overlayRef.backdropClick().pipe(take(1)).subscribe(() => {
-      overlayRef.detach();
-    });
 
-    return overlayRef;
+    return cmRef;
   }
 
-  private _getInjector(options: IContextMenuOption[]) {
+  private _getInjector(options: IContextMenuOption[], cmRef: ContextMenuRef) {
     const tokens = new WeakMap();
 
-    if (options) {
-      tokens.set(CONTEXT_MENU_OPTIONS, options);
-    }
+    tokens.set(ContextMenuRef, cmRef);
+    tokens.set(CONTEXT_MENU_OPTIONS, options);
 
     return new PortalInjector(this._injector, tokens);
   }
