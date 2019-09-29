@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
+import { TreeStatus } from '@swimlane/ngx-datatable';
 import { Observable } from 'rxjs';
 
 import { IProcess } from './models';
@@ -27,5 +28,9 @@ export class ProcessService {
 
   add(processes: IProcess[]) {
     this._store.dispatch(actions.add({ processes }));
+  }
+
+  updateTreeStatus(pid: number, status: TreeStatus) {
+    this._store.dispatch(actions.updateTreeStatus({ pid, status }));
   }
 }

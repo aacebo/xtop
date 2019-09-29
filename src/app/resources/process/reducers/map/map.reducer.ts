@@ -9,10 +9,20 @@ export const mapReducer = createReducer<{ [key: number]: IProcess }>(
     const map: { [key: number]: IProcess } = { };
 
     for (const process of action.processes) {
+      const existing = _[process.pid];
       map[process.pid] = process;
-      map[process.pid].treeStatus = 'expanded';
+
+      if (!existing) {
+        map[process.pid].treeStatus = 'expanded';
+      } else {
+        map[process.pid].treeStatus = existing.treeStatus;
+      }
     }
 
     return map;
+  }),
+  on(actions.updateTreeStatus, (_, action) => {
+    _[action.pid].treeStatus = action.status;
+    return _;
   }),
 );

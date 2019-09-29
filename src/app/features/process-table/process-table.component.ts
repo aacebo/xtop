@@ -1,6 +1,6 @@
-import { Component, ChangeDetectionStrategy, Input, ViewChild, OnChanges } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, ViewChild, OnChanges, Output, EventEmitter } from '@angular/core';
 import { MatBottomSheetRef } from '@angular/material';
-import { ColumnMode, SelectionType, DatatableComponent } from '@swimlane/ngx-datatable';
+import { ColumnMode, SelectionType, DatatableComponent, TreeStatus } from '@swimlane/ngx-datatable';
 
 import { IProcess } from '../../resources/process';
 import { ProcessSheetService, ProcessSheetComponent, ProcessSheetAction } from '../process-sheet';
@@ -15,6 +15,8 @@ export class ProcessTableComponent implements OnChanges {
   @Input() processes: IProcess[] = [];
   @Input() isMac = false;
 
+  @Output() treeStatusChanged = new EventEmitter<{ pid: number; status: TreeStatus }>();
+
   @ViewChild(DatatableComponent, { static: false }) ngxDatatable: DatatableComponent;
 
   readonly ColumnMode = ColumnMode;
@@ -24,9 +26,7 @@ export class ProcessTableComponent implements OnChanges {
 
   private _processSheetRef: MatBottomSheetRef<ProcessSheetComponent>;
 
-  constructor(
-    private readonly _processSheet: ProcessSheetService,
-  ) { }
+  constructor(private readonly _processSheet: ProcessSheetService) { }
 
   ngOnChanges() {
     const pids = this.selected.map(o => o.pid);
@@ -56,6 +56,10 @@ export class ProcessTableComponent implements OnChanges {
     }
 
     this.processes = [...this.processes];
+    this.treeStatusChanged.emit({
+      pid: e.row.pid,
+      status: e.row.treeStatus,
+    });
   }
 
   private _onSheetDismissed(action?: ProcessSheetAction) {
