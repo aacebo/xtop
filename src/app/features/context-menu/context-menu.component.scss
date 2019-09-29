@@ -1,0 +1,16 @@
+:host {
+  display: block;
+  width: 200px;
+  color: #fff;
+  background-color: #000;
+
+  .context-menu--option {
+    display: block;
+    padding: 2px 5px;
+    cursor: pointer;
+
+    // &:hover {
+
+    // }
+  }
+}

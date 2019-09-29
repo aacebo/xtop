@@ -2,6 +2,7 @@ import { Component, ChangeDetectionStrategy, Input, ViewChild, Output, EventEmit
 import { ColumnMode, SelectionType, DatatableComponent, TreeStatus, ContextmenuType } from '@swimlane/ngx-datatable';
 
 import { IProcess } from '../../resources/process';
+import { ContextMenuService } from '../context-menu';
 
 @Component({
   selector: 'app-process-table',
@@ -21,6 +22,8 @@ export class ProcessTableComponent {
   readonly SelectionType = SelectionType;
 
   selected: IProcess[] = [];
+
+  constructor(private readonly contextMenu: ContextMenuService) { }
 
   getRowId(p: IProcess) {
     return p.pid;
@@ -50,7 +53,7 @@ export class ProcessTableComponent {
 
   onContextMenu(e: { event: MouseEvent; type: ContextmenuType; content: IProcess }) {
     if (e.type === ContextmenuType.body) {
-
+      this.contextMenu.open([{ text: 'Kill' }], e.event.x, e.event.y);
     } else {
 
     }
