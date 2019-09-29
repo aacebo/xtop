@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input, ViewChild, OnChanges, Output, EventEmitter } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { MatBottomSheetRef } from '@angular/material';
 import { ColumnMode, SelectionType, DatatableComponent, TreeStatus } from '@swimlane/ngx-datatable';
 
@@ -11,7 +11,7 @@ import { ProcessSheetService, ProcessSheetComponent, ProcessSheetAction } from '
   styleUrls: ['./process-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProcessTableComponent implements OnChanges {
+export class ProcessTableComponent {
   @Input() processes: IProcess[] = [];
   @Input() isMac = false;
 
@@ -28,9 +28,8 @@ export class ProcessTableComponent implements OnChanges {
 
   constructor(private readonly _processSheet: ProcessSheetService) { }
 
-  ngOnChanges() {
-    const pids = this.selected.map(o => o.pid);
-    this.selected = this.processes.filter(o => pids.some(v => v === o.pid));
+  getRowId(p: IProcess) {
+    return p.pid;
   }
 
   onSelect(e: { selected: IProcess[] }) {

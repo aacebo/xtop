@@ -1,6 +1,7 @@
 <ngx-datatable
   class="fullscreen"
   trackByProp="pid"
+  [rowIdentity]="getRowId"
   [class.mac]="isMac"
   [headerHeight]="30"
   [footerHeight]="0"
