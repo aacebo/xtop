@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { BehaviorSubject } from 'rxjs';
 
 import { SearchDialogComponent } from './search-dialog.component';
 
@@ -8,8 +7,6 @@ import { SearchDialogComponent } from './search-dialog.component';
   providedIn: 'root',
 })
 export class SearchService {
-  readonly text = new BehaviorSubject<string>(null);
-
   constructor(private readonly _dialog: MatDialog) { }
 
   open() {

@@ -1,8 +1,7 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
-
-import { SearchService } from './search.service';
 
 @Component({
   selector: 'app-search-dialog',
@@ -12,12 +11,11 @@ import { SearchService } from './search.service';
 })
 export class SearchDialogComponent implements OnInit {
   readonly control = new FormControl();
-
-  constructor(private readonly _search: SearchService) { }
+  readonly text$ = new BehaviorSubject<string>(null);
 
   ngOnInit() {
     this.control.valueChanges.pipe(
-      tap((text: string) => this._search.text.next(text)),
+      tap((text: string) => this.text$.next(text)),
     );
   }
 }

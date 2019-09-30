@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { IProcess } from '../../resources/process';
 import { ContextMenuService, IContextMenuOption } from '../context-menu';
 import { IProcessTableAction } from './process-table-action.interface';
+import { SearchService } from '../search';
 
 @Component({
   selector: 'app-process-table',
@@ -17,6 +18,7 @@ export class ProcessTableComponent {
   @Input() isMac = false;
 
   @Output() treeStatusChanged = new EventEmitter<{ pid: number; status: TreeStatus }>();
+  @Output() filter = new EventEmitter<{ prop: keyof IProcess; value: string | number }>();
 
   @ViewChild(DatatableComponent, { static: false }) ngxDatatable: DatatableComponent;
 
@@ -45,7 +47,10 @@ export class ProcessTableComponent {
     }));
   }
 
-  constructor(private readonly contextMenu: ContextMenuService) { }
+  constructor(
+    private readonly _contextMenu: ContextMenuService,
+    private readonly _search: SearchService,
+  ) { }
 
   getRowId(p: IProcess) {
     return p.pid;
@@ -71,11 +76,23 @@ export class ProcessTableComponent {
 
   onContextMenu(e: { event: MouseEvent; type: ContextmenuType; content: IProcess }) {
     if (e.type === ContextmenuType.body) {
-      const ref = this.contextMenu.open(this.contextMenuOptions, e.event.x, e.event.y);
+      const ref = this._contextMenu.open(this.contextMenuOptions, e.event.x, e.event.y);
       ref.closed.subscribe(this._onContextMenuClosed.bind(this));
     } else {
 
     }
+  }
+
+  onSearch(prop: keyof IProcess, e: Event) {
+    e.stopImmediatePropagation();
+    const ref = this._search.open();
+    const sub = ref.componentInstance.text$.subscribe(text => {
+      if (text) {
+        this.filter.emit({ prop, value: text });
+      }
+    });
+
+    ref.afterClosed().subscribe(() => sub.unsubscribe());
   }
 
   @HostListener('document:keydown', ['$event'])

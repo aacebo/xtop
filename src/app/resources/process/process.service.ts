@@ -17,6 +17,7 @@ export class ProcessService {
   readonly map$: Observable<{ [pid: number]: IProcess }>;
   readonly entities$: Observable<IProcess[]>;
   readonly count$: Observable<number>;
+  readonly filters$: Observable<Partial<IProcess>>;
 
   constructor(private readonly _store: Store<IProcessState>) {
     this.state$ = this._store.pipe(select(selectors.selectState));
@@ -24,6 +25,7 @@ export class ProcessService {
     this.map$ = this._store.pipe(select(selectors.selectMap));
     this.entities$ = this._store.pipe(select(selectors.selectEntities));
     this.count$ = this._store.pipe(select(selectors.selectCount));
+    this.filters$ = this._store.pipe(select(selectors.selectFilters));
   }
 
   add(processes: IProcess[]) {
@@ -32,5 +34,9 @@ export class ProcessService {
 
   updateTreeStatus(pid: number, status: TreeStatus) {
     this._store.dispatch(actions.updateTreeStatus({ pid, status }));
+  }
+
+  filter(prop: keyof IProcess, value: string | number) {
+    this._store.dispatch(actions.filter({ prop, value }));
   }
 }

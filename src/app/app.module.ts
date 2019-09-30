@@ -15,6 +15,7 @@ import { environment } from '../environments/environment';
 import { SidenavModule } from './features/sidenav';
 import { ToolbarModule } from './features/toolbar';
 import { ContextMenuModule } from './features/context-menu';
+import { SearchModule } from './features/search';
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,6 +35,7 @@ import { ContextMenuModule } from './features/context-menu';
     SidenavModule,
     ToolbarModule,
     ContextMenuModule,
+    SearchModule,
   ],
 })
 export class AppModule { }

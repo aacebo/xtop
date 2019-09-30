@@ -8,6 +8,7 @@ import { ProcessTableComponent } from './process-table.component';
 import { BytesToStringModule } from '../bytes-to-string';
 import { PriorityToStringModule } from '../priority-to-string';
 import { ContextMenuModule } from '../context-menu';
+import { SearchModule } from '../search';
 
 @NgModule({
   declarations: [ProcessTableComponent],
@@ -22,6 +23,7 @@ import { ContextMenuModule } from '../context-menu';
     BytesToStringModule,
     PriorityToStringModule,
     ContextMenuModule,
+    SearchModule,
   ],
 })
 export class ProcessTableModule { }

@@ -27,4 +27,8 @@ export class ProcessesComponent implements OnInit {
   onTreeStatusChanged(e: { pid: number; status: TreeStatus }) {
     this.process.updateTreeStatus(e.pid, e.status);
   }
+
+  onFilter(e: { prop: keyof IProcess; value: string | number }) {
+    this.process.filter(e.prop, e.value);
+  }
 }

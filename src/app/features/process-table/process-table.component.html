@@ -1,6 +1,5 @@
 <ngx-datatable
   class="fullscreen"
-  trackByProp="pid"
   [rowIdentity]="getRowId"
   [class.mac]="isMac"
   [headerHeight]="30"
@@ -25,6 +24,7 @@
     width="300"
     [sortable]="true"
     [isTreeColumn]="true"
+    [headerTemplate]="headerTemplate"
   ></ngx-datatable-column>
 
   <ngx-datatable-column
@@ -32,6 +32,7 @@
     prop="user"
     width="80"
     [sortable]="true"
+    [headerTemplate]="headerTemplate"
   ></ngx-datatable-column>
 
   <ngx-datatable-column
@@ -39,6 +40,7 @@
     prop="cpu"
     width="80"
     [sortable]="true"
+    [headerTemplate]="headerTemplate"
   ></ngx-datatable-column>
 
   <ngx-datatable-column
@@ -46,6 +48,7 @@
     prop="mem"
     width="80"
     [sortable]="true"
+    [headerTemplate]="headerTemplate"
   ></ngx-datatable-column>
 
   <ngx-datatable-column
@@ -53,6 +56,7 @@
     prop="priority"
     width="80"
     [sortable]="true"
+    [headerTemplate]="headerTemplate"
   >
     <ng-template
       ngx-datatable-cell-template
@@ -67,6 +71,7 @@
     prop="rss"
     width="80"
     [sortable]="true"
+    [headerTemplate]="headerTemplate"
   >
     <ng-template
       ngx-datatable-cell-template
@@ -81,6 +86,7 @@
     prop="vsz"
     width="80"
     [sortable]="true"
+    [headerTemplate]="headerTemplate"
   >
     <ng-template
       ngx-datatable-cell-template
@@ -95,6 +101,7 @@
     prop="pid"
     width="80"
     [sortable]="true"
+    [headerTemplate]="headerTemplate"
   ></ngx-datatable-column>
 </ngx-datatable>
 
@@ -110,3 +117,34 @@
     inline
   ></mat-icon>
 </button>
+
+<ng-template
+  #headerTemplate
+  ngx-datatable-header-template
+  let-column="column"
+  let-sort="sortFn"
+  let-dir="sortDir"
+>
+  <div
+    class="ngx-datatable--custom-header-cell"
+    (click)="sort.call()"
+  >
+    <div class="ngx-datatable--custom-header-cell--text">
+      {{ column.name }}
+    </div>
+
+    <mat-icon
+      class="ngx-datatable--custom-header-cell--search-icon fas fa-search"
+      inline
+      (click)="onSearch(column.prop, $event)"
+    ></mat-icon>
+
+    <mat-icon
+      *ngIf="dir"
+      class="fas"
+      [class.fa-angle-down]="dir === 'desc'"
+      [class.fa-angle-up]="dir === 'asc'"
+      inline
+    ></mat-icon>
+  </div>
+</ng-template>

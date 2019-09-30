@@ -7,3 +7,4 @@ export const selectKeys = createSelector(selectState, state => state.keys);
 export const selectMap = createSelector(selectState, state => state.map);
 export const selectEntities = createSelector(selectState, state => Object.values(state.map));
 export const selectCount = createSelector(selectEntities, entities => entities.length);
+export const selectFilters = createSelector(selectState, state => state.filters);
