@@ -9,10 +9,11 @@ import { SearchDialogComponent } from './search-dialog.component';
 export class SearchService {
   constructor(private readonly _dialog: MatDialog) { }
 
-  open() {
+  open(text?: string | number) {
     return this._dialog.open(SearchDialogComponent, {
       hasBackdrop: true,
       panelClass: 'search-panel',
+      data: { text },
     });
   }
 }

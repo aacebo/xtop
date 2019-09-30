@@ -6,9 +6,16 @@ import { IProcess } from '../../models';
 export const filtersReducer = createReducer<Partial<IProcess>>(
   { },
   on(actions.filter, (_, action) => {
-    return {
-      ..._,
-      [action.prop]: action.value,
-    };
+    if (action.value !== undefined && action.value !== '') {
+      return {
+        ..._,
+        [action.prop]: action.value,
+      };
+    } else {
+      delete _[action.prop];
+      return {
+        ..._,
+      };
+    }
   }),
 );

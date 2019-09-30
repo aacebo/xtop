@@ -15,6 +15,7 @@ import { SearchService } from '../search';
 })
 export class ProcessTableComponent {
   @Input() processes: IProcess[] = [];
+  @Input() filters: Partial<IProcess> = { };
   @Input() isMac = false;
 
   @Output() treeStatusChanged = new EventEmitter<{ pid: number; status: TreeStatus }>();
@@ -85,11 +86,9 @@ export class ProcessTableComponent {
 
   onSearch(prop: keyof IProcess, e: Event) {
     e.stopImmediatePropagation();
-    const ref = this._search.open();
+    const ref = this._search.open(this.filters[prop]);
     const sub = ref.componentInstance.text$.subscribe(text => {
-      if (text) {
-        this.filter.emit({ prop, value: text });
-      }
+      this.filter.emit({ prop, value: text });
     });
 
     ref.afterClosed().subscribe(() => sub.unsubscribe());

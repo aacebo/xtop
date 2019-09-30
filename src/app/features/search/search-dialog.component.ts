@@ -1,7 +1,8 @@
-import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Inject, OnInit, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { BehaviorSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { MAT_DIALOG_DATA } from '@angular/material';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { tap, takeUntil, debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search-dialog',
@@ -9,13 +10,28 @@ import { tap } from 'rxjs/operators';
   styleUrls: ['./search-dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SearchDialogComponent implements OnInit {
-  readonly control = new FormControl();
-  readonly text$ = new BehaviorSubject<string>(null);
+export class SearchDialogComponent implements OnInit, OnDestroy {
+  readonly control: FormControl;
+  readonly text$: BehaviorSubject<string>;
+
+  private readonly _destroy = new Subject<void>();
+
+  constructor(
+    @Inject(MAT_DIALOG_DATA) private readonly _data: { text?: string; },
+  ) {
+    this.text$ = new BehaviorSubject<string>(this._data.text);
+    this.control = new FormControl(this._data.text);
+  }
 
   ngOnInit() {
     this.control.valueChanges.pipe(
-      tap((text: string) => this.text$.next(text)),
-    );
+      debounceTime(500),
+      tap(text => this.text$.next(text)),
+    ).pipe(takeUntil(this._destroy)).subscribe();
+  }
+
+  ngOnDestroy() {
+    this._destroy.next();
+    this._destroy.complete();
   }
 }

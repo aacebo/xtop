@@ -1,5 +1,6 @@
 <app-process-table
   [processes]="process.entities$ | async"
+  [filters]="process.filters$ | async"
   [isMac]="system.isMac$ | async"
   (treeStatusChanged)="onTreeStatusChanged($event)"
   (filter)="onFilter($event)"
