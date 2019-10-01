@@ -2,6 +2,7 @@ import { BytesToStringPipe } from '../bytes-to-string';
 import { PriorityToStringPipe } from '../priority-to-string';
 
 import { IProcessTableColumn } from './process-table-column.interface';
+import { ElapseTimeToStringPipe } from '../elapse-time-to-string';
 
 export const PROCESS_TABLE_COLUMNS: { [prop: string]: IProcessTableColumn } = {
   name: {
@@ -9,8 +10,9 @@ export const PROCESS_TABLE_COLUMNS: { [prop: string]: IProcessTableColumn } = {
     prop: 'name',
     width: 300,
     sortable: true,
-    isTreeColumn: true,
     filterable: true,
+    isTreeColumn: true,
+    treeLevelIndent: 20,
   },
   user: {
     name: 'User',
@@ -58,5 +60,18 @@ export const PROCESS_TABLE_COLUMNS: { [prop: string]: IProcessTableColumn } = {
     width: 80,
     sortable: true,
     filterable: true,
+  },
+  threads: {
+    name: 'Threads',
+    prop: 'threads',
+    width: 80,
+    sortable: true,
+  },
+  etime: {
+    name: 'Started',
+    prop: 'etime',
+    width: 200,
+    sortable: true,
+    pipe: new ElapseTimeToStringPipe(),
   },
 };

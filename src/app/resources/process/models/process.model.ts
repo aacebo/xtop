@@ -10,10 +10,12 @@ export interface IProcess {
   readonly rss: number;
   readonly cpu: number;
   readonly mem: number;
-  readonly etime: string;
+  readonly etime: number;
   readonly priority: number;
+  readonly threads: number;
   readonly name: string;
   readonly command: string;
 
+  children: number;
   treeStatus?: TreeStatus;
 }

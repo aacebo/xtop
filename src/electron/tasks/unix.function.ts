@@ -33,7 +33,8 @@ export async function unix(cols: ITasksColumn[]) {
       const args = line.trim().split(' ', cols.length);
 
       for (let i = 0; i < cols.length; i++) {
-        map[cols[i].label] = isNaN(+args[i]) ? args[i] : +args[i];
+        const v = isNaN(+args[i]) ? args[i] : +args[i];
+        map[cols[i].label] = cols[i].formatter ? cols[i].formatter(v) : v;
       }
 
       data.push(map);

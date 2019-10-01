@@ -1,6 +1,7 @@
 import { ITasksOptions } from './tasks-options.interface';
 import { ITasksColumn } from './tasks-column.interface';
 import { unix } from './unix.function';
+import * as formatters from './formatters';
 
 export class Tasks {
   private static _columns: ITasksColumn[] = [
@@ -13,8 +14,9 @@ export class Tasks {
     { key: 'rss', label: 'rss' },
     { key: '%cpu', label: 'cpu' },
     { key: '%mem', label: 'mem' },
-    { key: 'etime', label: 'etime' },
+    { key: 'etime', label: 'etime', formatter: formatters.etimeFormatter },
     { key: 'pri', label: 'priority' },
+    { key: 'thcount', label: 'threads' },
     { key: 'comm', label: 'name' },
     { key: 'command', label: 'command' },
   ];

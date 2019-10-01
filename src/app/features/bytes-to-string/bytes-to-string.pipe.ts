@@ -6,7 +6,7 @@ const UNITS = ['KB', 'MB', 'GB', 'TB'];
   name: 'bytesToString',
 })
 export class BytesToStringPipe implements PipeTransform {
-  transform(bytes: number): string {
+  transform(bytes: number) {
     let i = -1;
     let size = bytes;
 

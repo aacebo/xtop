@@ -25,8 +25,10 @@
     [width]="col.width"
     [sortable]="col.sortable"
     [isTreeColumn]="col.isTreeColumn"
+    [treeLevelIndent]="col.treeLevelIndent"
     [pipe]="col.pipe"
     [headerTemplate]="headerTemplate"
+    [cellTemplate]="col.isTreeColumn ? treeToggleTemplate : undefined"
   ></ngx-datatable-column>
 </ngx-datatable>
 
@@ -44,8 +46,37 @@
 </button>
 
 <ng-template
+  #treeToggleTemplate
+  let-column="column"
+  let-row="row"
+  let-treeAction="onTreeAction"
+>
+  <div
+    class="ngx-datatable--custom-row-toggle"
+    [style.margin-left.px]="row.children === 0 ? 28 : 0"
+  >
+    <mat-icon
+      *ngIf="row.children > 0"
+      class="fas"
+      [class.fa-angle-down]="row.treeStatus === 'expanded'"
+      [class.fa-angle-right]="row.treeStatus === 'collapsed'"
+      inline
+      (click)="$event.stopImmediatePropagation(); treeAction.call();"
+    ></mat-icon>
+
+    <span
+      [matBadge]="row.children"
+      [matBadgeHidden]="row.children === 0 || row.treeStatus === 'expanded'"
+      matBadgeSize="small"
+      [matTooltip]="row.command"
+    >
+      {{ row[column.prop] }}
+    </span>
+  </div>
+</ng-template>
+
+<ng-template
   #headerTemplate
-  ngx-datatable-header-template
   let-column="column"
   let-sort="sortFn"
   let-dir="sortDir"

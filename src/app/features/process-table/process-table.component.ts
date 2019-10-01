@@ -83,8 +83,6 @@ export class ProcessTableComponent {
     if (e.type === ContextmenuType.body) {
       const ref = this._contextMenu.open(this.contextMenuOptions, e.event.x, e.event.y);
       ref.closed.subscribe(this._onContextMenuClosed.bind(this));
-    } else {
-
     }
   }
 

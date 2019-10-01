@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatButtonModule, MatIconModule, MatTooltipModule } from '@angular/material';
+import { MatButtonModule, MatIconModule, MatTooltipModule, MatBadgeModule } from '@angular/material';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { ProcessTableComponent } from './process-table.component';
 
 import { BytesToStringModule } from '../bytes-to-string';
 import { PriorityToStringModule } from '../priority-to-string';
+import { ElapseTimeToStringModule } from '../elapse-time-to-string';
 import { ContextMenuModule } from '../context-menu';
 import { SearchModule } from '../search';
 
@@ -18,10 +19,12 @@ import { SearchModule } from '../search';
     MatButtonModule,
     MatIconModule,
     MatTooltipModule,
+    MatBadgeModule,
 
     NgxDatatableModule,
     BytesToStringModule,
     PriorityToStringModule,
+    ElapseTimeToStringModule,
     ContextMenuModule,
     SearchModule,
   ],

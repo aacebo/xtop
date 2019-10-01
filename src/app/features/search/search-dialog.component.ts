@@ -37,6 +37,7 @@ export class SearchDialogComponent implements OnInit, OnDestroy {
   }
 
   onEnter() {
+    this.text$.next(this.control.value);
     this._dialogRef.close();
   }
 }
