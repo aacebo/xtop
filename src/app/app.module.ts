@@ -12,10 +12,12 @@ import { AppComponent } from './app.component';
 
 import { ResourcesModule } from './resources';
 import { environment } from '../environments/environment';
+
 import { SidenavModule } from './features/sidenav';
 import { ToolbarModule } from './features/toolbar';
 import { ContextMenuModule } from './features/context-menu';
 import { SearchModule } from './features/search';
+import { ConfirmDialogModule } from './features/confirm-dialog';
 
 @NgModule({
   declarations: [AppComponent],
@@ -36,6 +38,7 @@ import { SearchModule } from './features/search';
     ToolbarModule,
     ContextMenuModule,
     SearchModule,
+    ConfirmDialogModule,
   ],
 })
 export class AppModule { }

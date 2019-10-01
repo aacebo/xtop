@@ -1,4 +1,4 @@
-import { ipcMain } from 'electron';
+import { ipcMain, Event } from 'electron';
 
 import { Tasks } from './tasks';
 
@@ -10,12 +10,14 @@ export class Processes {
     this._cb = cb;
     ipcMain.on('processes.subscribe', this._subscribe.bind(this));
     ipcMain.on('processes.unsubscribe', this._unsubscribe.bind(this));
+    ipcMain.on('processes.kill', this._kill.bind(this));
   }
 
   static unregister() {
     this._unsubscribe();
     ipcMain.removeAllListeners('processes.subscribe');
     ipcMain.removeAllListeners('processes.subscribe');
+    ipcMain.removeAllListeners('processes.kill');
   }
 
   private static async _subscribe() {
@@ -23,12 +25,17 @@ export class Processes {
 
     this._timer = setInterval(async () => {
       this._cb(await Tasks.find());
-    }, 5000);
+    }, 3000);
   }
 
   private static _unsubscribe() {
     this._timer.unref();
     clearInterval(this._timer);
     this._timer = undefined;
+  }
+
+  private static async _kill(_: Event, pids: number[]) {
+    console.log(pids);
+    await Tasks.kill(pids);
   }
 }

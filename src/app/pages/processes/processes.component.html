@@ -4,4 +4,5 @@
   [isMac]="system.isMac$ | async"
   (treeStatusChanged)="onTreeStatusChanged($event)"
   (filter)="onFilter($event)"
+  (kill)="onKill($event)"
 ></app-process-table>

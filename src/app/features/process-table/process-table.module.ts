@@ -10,6 +10,7 @@ import { PriorityToStringModule } from '../priority-to-string';
 import { ElapseTimeToStringModule } from '../elapse-time-to-string';
 import { ContextMenuModule } from '../context-menu';
 import { SearchModule } from '../search';
+import { ConfirmDialogModule } from '../confirm-dialog';
 
 @NgModule({
   declarations: [ProcessTableComponent],
@@ -27,6 +28,7 @@ import { SearchModule } from '../search';
     ElapseTimeToStringModule,
     ContextMenuModule,
     SearchModule,
+    ConfirmDialogModule,
   ],
 })
 export class ProcessTableModule { }

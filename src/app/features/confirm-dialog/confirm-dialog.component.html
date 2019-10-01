@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>
+  {{ options.title }}
+</h2>
+
+<mat-dialog-content>
+  {{ options.content }}
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button
+    mat-flat-button
+    [color]="options.buttons?.primary?.color || 'primary'"
+    (click)="confirm()"
+  >
+    {{ options.buttons?.primary?.text || 'Yes' }}
+  </button>
+
+  <button
+    mat-flat-button
+    [color]="options.buttons?.secondary?.color || 'default'"
+    (click)="cancel()"
+  >
+    {{ options.buttons?.secondary?.text || 'No' }}
+  </button>
+</mat-dialog-actions>

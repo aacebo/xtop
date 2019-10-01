@@ -5,7 +5,7 @@ import { ITasksColumn } from './tasks-column.interface';
 
 const exec = util.promisify(cp.exec);
 
-export async function unix(cols: ITasksColumn[]) {
+export async function find(cols: ITasksColumn[]) {
   let cmd = 'ps -A -o ';
 
   for (let i = 0; i < cols.length; i++) {

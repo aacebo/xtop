@@ -31,4 +31,9 @@ export class ProcessesComponent implements OnInit {
   onFilter(e: { prop: keyof IProcess; value: string | number }) {
     this.process.filter(e.prop, e.value);
   }
+
+  onKill(pids: number[]) {
+    this._electron.send('processes.kill', pids);
+    this.process.remove(pids);
+  }
 }

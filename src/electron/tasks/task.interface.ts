@@ -11,6 +11,7 @@ export interface ITask {
   readonly etime: number;
   readonly priority: number;
   readonly threads: number;
+  readonly state: string;
   readonly name: string;
   readonly command: string;
 }

@@ -3,6 +3,7 @@ import { PriorityToStringPipe } from '../priority-to-string';
 
 import { IProcessTableColumn } from './process-table-column.interface';
 import { ElapseTimeToStringPipe } from '../elapse-time-to-string';
+import { ProcessStateToStringPipe } from '../process-state-to-string';
 
 export const PROCESS_TABLE_COLUMNS: { [prop: string]: IProcessTableColumn } = {
   name: {
@@ -66,6 +67,13 @@ export const PROCESS_TABLE_COLUMNS: { [prop: string]: IProcessTableColumn } = {
     prop: 'threads',
     width: 80,
     sortable: true,
+  },
+  state: {
+    name: 'Status',
+    prop: 'state',
+    width: 100,
+    sortable: true,
+    pipe: new ProcessStateToStringPipe(),
   },
   etime: {
     name: 'Started',

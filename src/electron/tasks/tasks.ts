@@ -1,6 +1,7 @@
 import { ITasksOptions } from './tasks-options.interface';
 import { ITasksColumn } from './tasks-column.interface';
-import { unix } from './unix.function';
+import { find } from './find.unix.function';
+import { kill } from './kill.unix.function';
 import * as formatters from './formatters';
 
 export class Tasks {
@@ -10,20 +11,27 @@ export class Tasks {
     { key: 'uid', label: 'uid' },
     { key: 'ruser', label: 'user' },
     { key: 'tty', label: 'tty' },
-    { key: 'vsz', label: 'vsz' },
-    { key: 'rss', label: 'rss' },
+    { key: 'vsz', label: 'vsz', formatter: formatters.kbToBytes },
+    { key: 'rss', label: 'rss', formatter: formatters.kbToBytes },
     { key: '%cpu', label: 'cpu' },
     { key: '%mem', label: 'mem' },
     { key: 'etime', label: 'etime', formatter: formatters.etimeFormatter },
     { key: 'pri', label: 'priority' },
     { key: 'thcount', label: 'threads' },
+    { key: 'state', label: 'state' },
     { key: 'comm', label: 'name' },
     { key: 'command', label: 'command' },
   ];
 
   static async find(options: ITasksOptions = { }) {
     if (process.platform !== 'win32') {
-      return await unix(options.cols ? options.cols : this._columns);
+      return await find(options.cols ? options.cols : this._columns);
+    }
+  }
+
+  static async kill(pids: number[]) {
+    if (process.platform !== 'win32') {
+      return await kill(pids);
     }
   }
 }

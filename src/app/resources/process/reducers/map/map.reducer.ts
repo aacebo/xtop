@@ -30,4 +30,12 @@ export const mapReducer = createReducer<{ [key: number]: IProcess }>(
     _[action.pid].treeStatus = action.status;
     return _;
   }),
+  on(actions.remove, (state, action) => {
+    for (const pid of action.pids) {
+      state[pid] = undefined;
+      delete state[pid];
+    }
+
+    return { ...state };
+  }),
 );

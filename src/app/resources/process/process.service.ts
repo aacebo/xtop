@@ -39,4 +39,8 @@ export class ProcessService {
   filter(prop: keyof IProcess, value: string | number) {
     this._store.dispatch(actions.filter({ prop, value }));
   }
+
+  remove(pids: number[]) {
+    this._store.dispatch(actions.remove({ pids }));
+  }
 }

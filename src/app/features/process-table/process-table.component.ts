@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { IProcess } from '../../resources/process';
 import { ContextMenuService, IContextMenuOption } from '../context-menu';
 import { SearchService } from '../search';
+import { ConfirmDialogService } from '../confirm-dialog';
 
 import { IProcessTableAction } from './process-table-action.interface';
 import { PROCESS_TABLE_COLUMNS } from './process-table-columns.constant';
@@ -22,6 +23,7 @@ export class ProcessTableComponent {
 
   @Output() treeStatusChanged = new EventEmitter<{ pid: number; status: TreeStatus }>();
   @Output() filter = new EventEmitter<{ prop: keyof IProcess; value: string | number }>();
+  @Output() kill = new EventEmitter<number[]>();
 
   @ViewChild(DatatableComponent, { static: false }) ngxDatatable: DatatableComponent;
 
@@ -55,6 +57,7 @@ export class ProcessTableComponent {
   constructor(
     private readonly _contextMenu: ContextMenuService,
     private readonly _search: SearchService,
+    private readonly _confirmDialog: ConfirmDialogService,
   ) { }
 
   getRowId(p: IProcess) {
@@ -123,7 +126,25 @@ export class ProcessTableComponent {
   }
 
   private _onKill() {
-    console.log('kill');
+    if (this.selected$.value.length > 0) {
+      this._confirmDialog.open({
+        title: `Kill ${this.selected$.value.length} Process(es)`,
+        content: 'Are you sure you want to kill the selected process(es)',
+        buttons: {
+          primary: {
+            text: 'Kill',
+            color: 'warn',
+          },
+          secondary: {
+            text: 'Cancel',
+          },
+        },
+      }).afterClosed().subscribe((kill?: boolean) => {
+        if (kill) {
+          this.kill.emit(this.selected$.value.map(s => s.pid));
+        }
+      });
+    }
   }
 
   private _onInfo() {

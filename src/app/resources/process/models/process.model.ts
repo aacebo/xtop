@@ -1,5 +1,7 @@
 import { TreeStatus } from '@swimlane/ngx-datatable';
 
+import { ProcessStateCode } from '../enums';
+
 export interface IProcess {
   readonly pid: number;
   readonly ppid: number;
@@ -13,6 +15,7 @@ export interface IProcess {
   readonly etime: number;
   readonly priority: number;
   readonly threads: number;
+  readonly state: ProcessStateCode;
   readonly name: string;
   readonly command: string;
 
