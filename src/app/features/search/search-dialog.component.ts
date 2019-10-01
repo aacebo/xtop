@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, Inject, OnInit, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { tap, takeUntil, debounceTime } from 'rxjs/operators';
 
@@ -18,6 +18,7 @@ export class SearchDialogComponent implements OnInit, OnDestroy {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private readonly _data: { text?: string; },
+    private readonly _dialogRef: MatDialogRef<SearchDialogComponent>,
   ) {
     this.text$ = new BehaviorSubject<string>(this._data.text);
     this.control = new FormControl(this._data.text);
@@ -33,5 +34,9 @@ export class SearchDialogComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this._destroy.next();
     this._destroy.complete();
+  }
+
+  onEnter() {
+    this._dialogRef.close();
   }
 }

@@ -1,3 +1,10 @@
 <input
+  autofocus
   [formControl]="control"
+  (keydown.enter)="onEnter()"
 />
+
+<mat-icon
+  class="fas fa-search"
+  inline
+></mat-icon>

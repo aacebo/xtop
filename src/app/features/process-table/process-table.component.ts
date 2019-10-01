@@ -4,8 +4,10 @@ import { BehaviorSubject } from 'rxjs';
 
 import { IProcess } from '../../resources/process';
 import { ContextMenuService, IContextMenuOption } from '../context-menu';
-import { IProcessTableAction } from './process-table-action.interface';
 import { SearchService } from '../search';
+
+import { IProcessTableAction } from './process-table-action.interface';
+import { PROCESS_TABLE_COLUMNS } from './process-table-columns.constant';
 
 @Component({
   selector: 'app-process-table',
@@ -23,6 +25,8 @@ export class ProcessTableComponent {
 
   @ViewChild(DatatableComponent, { static: false }) ngxDatatable: DatatableComponent;
 
+  readonly PROCESS_TABLE_COLUMNS = PROCESS_TABLE_COLUMNS;
+  readonly Columns = Object.values(PROCESS_TABLE_COLUMNS);
   readonly ColumnMode = ColumnMode;
   readonly SelectionType = SelectionType;
   readonly selected$ = new BehaviorSubject<IProcess[]>([]);
@@ -92,6 +96,11 @@ export class ProcessTableComponent {
     });
 
     ref.afterClosed().subscribe(() => sub.unsubscribe());
+  }
+
+  onClear(prop: keyof IProcess, e: Event) {
+    e.stopImmediatePropagation();
+    this.filter.emit({ prop, value: undefined });
   }
 
   @HostListener('document:keydown', ['$event'])

@@ -19,88 +19,13 @@
   (tableContextmenu)="onContextMenu($event)"
 >
   <ngx-datatable-column
-    name="Name"
-    prop="name"
-    width="300"
-    [sortable]="true"
-    [isTreeColumn]="true"
-    [headerTemplate]="headerTemplate"
-  ></ngx-datatable-column>
-
-  <ngx-datatable-column
-    name="User"
-    prop="user"
-    width="80"
-    [sortable]="true"
-    [headerTemplate]="headerTemplate"
-  ></ngx-datatable-column>
-
-  <ngx-datatable-column
-    name="CPU %"
-    prop="cpu"
-    width="80"
-    [sortable]="true"
-    [headerTemplate]="headerTemplate"
-  ></ngx-datatable-column>
-
-  <ngx-datatable-column
-    name="Memory %"
-    prop="mem"
-    width="80"
-    [sortable]="true"
-    [headerTemplate]="headerTemplate"
-  ></ngx-datatable-column>
-
-  <ngx-datatable-column
-    name="Priority"
-    prop="priority"
-    width="80"
-    [sortable]="true"
-    [headerTemplate]="headerTemplate"
-  >
-    <ng-template
-      ngx-datatable-cell-template
-      let-v="value"
-    >
-      {{ v | priorityToString }}
-    </ng-template>
-  </ngx-datatable-column>
-
-  <ngx-datatable-column
-    name="RSS"
-    prop="rss"
-    width="80"
-    [sortable]="true"
-    [headerTemplate]="headerTemplate"
-  >
-    <ng-template
-      ngx-datatable-cell-template
-      let-v="value"
-    >
-      {{ v | bytesToString }}
-    </ng-template>
-  </ngx-datatable-column>
-
-  <ngx-datatable-column
-    name="VSZ"
-    prop="vsz"
-    width="80"
-    [sortable]="true"
-    [headerTemplate]="headerTemplate"
-  >
-    <ng-template
-      ngx-datatable-cell-template
-      let-v="value"
-    >
-      {{ v | bytesToString }}
-    </ng-template>
-  </ngx-datatable-column>
-
-  <ngx-datatable-column
-    name="PID"
-    prop="pid"
-    width="80"
-    [sortable]="true"
+    *ngFor="let col of Columns"
+    [name]="col.name"
+    [prop]="col.prop"
+    [width]="col.width"
+    [sortable]="col.sortable"
+    [isTreeColumn]="col.isTreeColumn"
+    [pipe]="col.pipe"
     [headerTemplate]="headerTemplate"
   ></ngx-datatable-column>
 </ngx-datatable>
@@ -134,9 +59,17 @@
     </div>
 
     <mat-icon
+      *ngIf="PROCESS_TABLE_COLUMNS[column.prop].filterable"
       class="ngx-datatable--custom-header-cell--search-icon fas fa-search"
       inline
       (click)="onSearch(column.prop, $event)"
+    ></mat-icon>
+
+    <mat-icon
+      *ngIf="filters[column.prop]"
+      class="fas fa-times"
+      inline
+      (click)="onClear(column.prop, $event)"
     ></mat-icon>
 
     <mat-icon
