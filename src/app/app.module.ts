@@ -3,6 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import 'hammerjs';
@@ -28,6 +29,7 @@ import { SettingsDialogModule } from './features/settings-dialog';
     BrowserAnimationsModule,
 
     StoreModule.forRoot({ }),
+    EffectsModule.forRoot([ ]),
     StoreDevtoolsModule.instrument({
       logOnly: environment.production,
       maxAge: 20,

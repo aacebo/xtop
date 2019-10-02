@@ -1,14 +1,14 @@
 import { Action, combineReducers } from '@ngrx/store';
 
-import { IProcessesSettings } from './models';
+import { ISettings } from './models';
 import * as fromReducers from './reducers';
 
 export interface ISettingsState {
-  readonly processes: IProcessesSettings;
+  readonly settings: ISettings;
 }
 
 export function reducers(state: ISettingsState, action: Action) {
   return combineReducers<ISettingsState>({
-    processes: fromReducers.processesReducer,
+    settings: fromReducers.settingsReducer,
   })(state, action);
 }

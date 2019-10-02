@@ -26,7 +26,7 @@
     [sortable]="col.sortable"
     [isTreeColumn]="col.isTreeColumn"
     [treeLevelIndent]="col.treeLevelIndent"
-    [pipe]="col.pipe"
+    [pipe]="PROCESS_TABLE_COLUMN_PIPES[col.prop]"
     [headerTemplate]="headerTemplate"
     [cellTemplate]="col.isTreeColumn ? treeToggleTemplate : undefined"
   ></ngx-datatable-column>

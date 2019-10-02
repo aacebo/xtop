@@ -1,9 +1,12 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 
-import { ISidenavItem } from './features/sidenav';
 import { ElectronService } from './core/services';
+
 import { SystemService, ISystem } from './resources/system';
 import { ProcessService } from './resources/process';
+import { SettingsService, ISettings } from './resources/settings';
+
+import { ISidenavItem } from './features/sidenav';
 import { SettingsDialogService } from './features/settings-dialog';
 
 @Component({
@@ -22,6 +25,7 @@ export class AppComponent implements OnInit {
     readonly system: SystemService,
     private readonly _process: ProcessService,
     private readonly _electron: ElectronService,
+    private readonly _settings: SettingsService,
     private readonly _settingsDialog: SettingsDialogService,
   ) { }
 
@@ -30,6 +34,10 @@ export class AppComponent implements OnInit {
 
     this._electron.on('system', (sys: ISystem) => {
       this.system.add(sys);
+    });
+
+    this._electron.on('settings', (settings: ISettings) => {
+      this._settings.init(settings);
     });
   }
 

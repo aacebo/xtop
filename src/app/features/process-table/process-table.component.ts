@@ -8,6 +8,7 @@ import { SearchService } from '../search';
 import { ConfirmDialogService } from '../confirm-dialog';
 
 import { IProcessTableAction } from './process-table-action.interface';
+import { PROCESS_TABLE_COLUMN_PIPES } from './process-table-column-pipes.constant';
 
 @Component({
   selector: 'app-process-table',
@@ -28,6 +29,7 @@ export class ProcessTableComponent {
 
   @ViewChild(DatatableComponent, { static: false }) ngxDatatable: DatatableComponent;
 
+  readonly PROCESS_TABLE_COLUMN_PIPES = PROCESS_TABLE_COLUMN_PIPES;
   readonly ColumnMode = ColumnMode;
   readonly SelectionType = SelectionType;
   readonly selected$ = new BehaviorSubject<IProcess[]>([]);

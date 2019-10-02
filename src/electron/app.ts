@@ -4,8 +4,10 @@ import * as url from 'url';
 import * as dev from 'electron-is-dev';
 import * as os from 'os';
 import * as path from 'path';
+import * as fs from 'fs';
 
 import { Processes } from './processes';
+import { Settings } from './settings';
 
 export class App {
   private _window: BrowserWindow;
@@ -54,6 +56,14 @@ export class App {
       this._window.webContents.send('system', {
         platform: process.platform,
       });
+
+      if (fs.existsSync(Settings.path)) {
+        const settings = fs.readFileSync(Settings.path, 'utf8');
+
+        if (settings) {
+          this._window.webContents.send('settings', JSON.parse(settings));
+        }
+      }
     });
 
     this._window.loadURL(url.format({
@@ -72,6 +82,7 @@ export class App {
       this._window = null;
     });
 
+    Settings.register();
     Processes.register(ps => {
       this._window.webContents.send('processes', ps);
     });

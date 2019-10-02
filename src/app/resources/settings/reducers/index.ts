@@ -1,1 +1,1 @@
-export * from './processes';
+export * from './settings';

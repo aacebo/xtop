@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, OnInit
 import { MatSelectionListChange } from '@angular/material';
 import { BehaviorSubject } from 'rxjs';
 
-import { IProcessesSettings } from '../../../../resources/settings';
+import { ISettings } from '../../../../resources/settings';
 import { IProcessTableColumn } from '../../../../resources/process';
 
 @Component({
@@ -12,26 +12,28 @@ import { IProcessTableColumn } from '../../../../resources/process';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProcessesSettingsComponent implements OnInit {
-  @Input() settings: IProcessesSettings;
+  @Input() settings: ISettings;
 
-  @Output() changed = new EventEmitter<IProcessesSettings>();
+  @Output() changed = new EventEmitter<ISettings>();
 
   readonly columns$ = new BehaviorSubject<IProcessTableColumn[]>([]);
 
   ngOnInit() {
-    this.columns$.next(Object.values(this.settings.columns));
+    this.columns$.next(Object.values(this.settings.processes.columns));
   }
 
   onColumnSelectionChange(e: MatSelectionListChange) {
-    const col = this.settings.columns[e.option.value];
+    const col = this.settings.processes.columns[e.option.value];
 
     this.changed.emit({
       ...this.settings,
-      columns: {
-        ...this.settings.columns,
-        [e.option.value]: {
-          ...col,
-          visible: e.option.selected,
+      processes: {
+        columns: {
+          ...this.settings.processes.columns,
+          [e.option.value]: {
+            ...col,
+            visible: e.option.selected,
+          },
         },
       },
     });
