@@ -17,7 +17,7 @@ export class Tasks {
     { key: '%mem', label: 'mem' },
     { key: 'etime', label: 'etime', formatter: formatters.etimeFormatter },
     { key: 'pri', label: 'priority' },
-    { key: 'thcount', label: 'threads' },
+    { key: 'nlwp', label: 'threads', mac: false },
     { key: 'state', label: 'state' },
     { key: 'comm', label: 'name' },
     { key: 'command', label: 'command' },

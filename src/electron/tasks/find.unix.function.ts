@@ -8,8 +8,12 @@ const exec = util.promisify(cp.exec);
 export async function find(cols: ITasksColumn[]) {
   let cmd = 'ps -A -o ';
 
+  if (process.platform === 'darwin') {
+    cols = cols.filter(c => c.mac !== false);
+  }
+
   for (let i = 0; i < cols.length; i++) {
-    cmd += `${cols[i].key}=${cols[i].label}`;
+    cmd += `${cols[i].key}=${cols[i].label || cols[i].key}`;
 
     if (i < cols.length - 1) {
       cmd += ',';
