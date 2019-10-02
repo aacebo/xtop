@@ -1,6 +1,12 @@
 {
   "name": "xtop",
   "version": "0.0.0",
+  "license": "MIT",
+  "description": "A cross platform resource management suite",
+  "author": {
+    "name": "Alexander Acebo",
+    "email": "aacebowork@gmail.com"
+  },
   "scripts": {
     "ng": "ng",
     "start": "npm run build && npm run electron-tsc",

@@ -1,4 +1,5 @@
-import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, HostListener } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 import { ElectronService } from './core/services';
 
@@ -16,6 +17,7 @@ import { SettingsDialogService } from './features/settings-dialog';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
+  readonly navOpen$ = new BehaviorSubject(true);
   readonly navItems: ISidenavItem[] = [
     { icon: 'fas fa-stream', tooltip: 'Processes', route: '/processes', badge: this._process.count$ },
     { icon: 'fas fa-memory', tooltip: 'Memory', route: '/memory' },

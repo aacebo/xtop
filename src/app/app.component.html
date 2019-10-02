@@ -2,7 +2,22 @@
 <app-sidenav
   [items]="navItems"
   [isMac]="system.isMac$ | async"
+  [opened]="navOpen$ | async"
   (settings)="onSettings()"
 >
   <router-outlet></router-outlet>
 </app-sidenav>
+
+<button
+  class="menu-btn"
+  mat-icon-button
+  [matTooltip]="(navOpen$ | async) ? 'Collapse' : 'Expand'"
+  matTooltipPosition="after"
+  (click)="navOpen$.next(!navOpen$.value)"
+>
+  <mat-icon
+    class="fas"
+    [ngClass]="(navOpen$ | async) ? 'fa-arrow-left' : 'fa-arrow-right'"
+    inline
+  ></mat-icon>
+</button>

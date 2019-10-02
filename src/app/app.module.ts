@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import { MatIconModule, MatButtonModule, MatTooltipModule } from '@angular/material';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -27,6 +28,9 @@ import { SettingsDialogModule } from './features/settings-dialog';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    MatIconModule,
+    MatButtonModule,
+    MatTooltipModule,
 
     StoreModule.forRoot({ }),
     EffectsModule.forRoot([ ]),

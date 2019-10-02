@@ -1,5 +1,8 @@
 <mat-sidenav-container>
-  <mat-sidenav mode="side" opened>
+  <mat-sidenav
+    mode="side"
+    [opened]="opened"
+  >
     <mat-list [class.mac]="isMac">
       <mat-list-item
         *ngFor="let item of items"

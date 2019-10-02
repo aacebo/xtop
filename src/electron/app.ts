@@ -6,6 +6,8 @@ import * as os from 'os';
 import * as path from 'path';
 import * as fs from 'fs';
 
+const pkg = require('../../package.json');
+
 import { Processes } from './processes';
 import { Settings } from './settings';
 
@@ -46,6 +48,7 @@ export class App {
       autoHideMenuBar: true,
       frame: this.isMac ? false : true,
       titleBarStyle: this.isMac ? 'hidden' : 'default',
+      backgroundColor: '#424242',
       webPreferences: {
         nodeIntegration: true,
         backgroundThrottling: false,
@@ -54,7 +57,13 @@ export class App {
 
     this._window.webContents.on('dom-ready', () => {
       this._window.webContents.send('system', {
+        pid: process.pid,
         platform: process.platform,
+        version: pkg.version,
+        license: pkg.license,
+        author: pkg.author,
+        name: pkg.name,
+        description: pkg.description,
       });
 
       if (fs.existsSync(Settings.path)) {
