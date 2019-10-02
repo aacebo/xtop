@@ -1,7 +1,9 @@
-import { BytesToStringPipe } from '../../../features/bytes-to-string';
-import { PriorityToStringPipe } from '../../../features/priority-to-string';
-import { ElapseTimeToStringPipe } from '../../../features/elapse-time-to-string';
-import { ProcessStateToStringPipe } from '../../../features/process-state-to-string';
+import {
+  BytesToStringPipe,
+  ElapseTimeToStringPipe,
+  PriorityToStringPipe,
+  ProcessStateToStringPipe,
+} from '../../../core/pipes';
 
 import { IProcessTableColumn } from '../models';
 
