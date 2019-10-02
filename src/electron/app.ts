@@ -46,6 +46,7 @@ export class App {
       alwaysOnTop: false,
       skipTaskbar: false,
       autoHideMenuBar: true,
+      darkTheme: true,
       frame: this.isMac ? false : true,
       titleBarStyle: this.isMac ? 'hidden' : 'default',
       backgroundColor: '#424242',
