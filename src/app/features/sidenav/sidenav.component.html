@@ -21,6 +21,19 @@
         </button>
       </mat-list-item>
     </mat-list>
+
+    <button
+      class="settings-btn"
+      mat-icon-button
+      matTooltip="Settings"
+      matTooltipPosition="after"
+      (click)="settings.emit()"
+    >
+      <mat-icon
+        class="fas fa-cog"
+        inline
+      ></mat-icon>
+    </button>
   </mat-sidenav>
 
   <mat-sidenav-content>

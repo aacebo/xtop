@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 import { ISidenavItem } from './sidenav-item.model';
 
@@ -11,4 +11,6 @@ import { ISidenavItem } from './sidenav-item.model';
 export class SidenavComponent {
   @Input() items: ISidenavItem[] = [];
   @Input() isMac = false;
+
+  @Output() settings = new EventEmitter<void>();
 }

@@ -2,13 +2,12 @@ import { Component, ChangeDetectionStrategy, Input, ViewChild, Output, EventEmit
 import { ColumnMode, SelectionType, DatatableComponent, TreeStatus, ContextmenuType } from '@swimlane/ngx-datatable';
 import { BehaviorSubject } from 'rxjs';
 
-import { IProcess } from '../../resources/process';
+import { IProcess, IProcessTableColumn } from '../../resources/process';
 import { ContextMenuService, IContextMenuOption } from '../context-menu';
 import { SearchService } from '../search';
 import { ConfirmDialogService } from '../confirm-dialog';
 
 import { IProcessTableAction } from './process-table-action.interface';
-import { PROCESS_TABLE_COLUMNS } from './process-table-columns.constant';
 
 @Component({
   selector: 'app-process-table',
@@ -20,6 +19,8 @@ export class ProcessTableComponent {
   @Input() processes: IProcess[] = [];
   @Input() filters: Partial<IProcess> = { };
   @Input() isMac = false;
+  @Input() columns: { [key: string]: IProcessTableColumn };
+  @Input() columnsIterable: IProcessTableColumn[] = [];
 
   @Output() treeStatusChanged = new EventEmitter<{ pid: number; status: TreeStatus }>();
   @Output() filter = new EventEmitter<{ prop: keyof IProcess; value: string | number }>();
@@ -27,8 +28,6 @@ export class ProcessTableComponent {
 
   @ViewChild(DatatableComponent, { static: false }) ngxDatatable: DatatableComponent;
 
-  readonly PROCESS_TABLE_COLUMNS = PROCESS_TABLE_COLUMNS;
-  readonly Columns = Object.values(PROCESS_TABLE_COLUMNS);
   readonly ColumnMode = ColumnMode;
   readonly SelectionType = SelectionType;
   readonly selected$ = new BehaviorSubject<IProcess[]>([]);
@@ -43,12 +42,14 @@ export class ProcessTableComponent {
       name: 'Info',
       key: 'i',
       ctrl: true,
+      condition: () => this.selected$.value.length === 1,
       cb: this._onInfo.bind(this),
     },
   ];
 
   private get contextMenuOptions(): IContextMenuOption[] {
-    return this.actions.map(a => ({
+    return this.actions.filter(a => !a.condition || (a.condition && a.condition()))
+                       .map(a => ({
       text: a.name,
       muted: `${a.ctrl ? 'Ctrl+' : ''}${a.key}`,
     }));
@@ -83,7 +84,7 @@ export class ProcessTableComponent {
   }
 
   onContextMenu(e: { event: MouseEvent; type: ContextmenuType; content: IProcess }) {
-    if (e.type === ContextmenuType.body) {
+    if (e.type === ContextmenuType.body && this.selected$.value.length > 0) {
       const ref = this._contextMenu.open(this.contextMenuOptions, e.event.x, e.event.y);
       ref.closed.subscribe(this._onContextMenuClosed.bind(this));
     }

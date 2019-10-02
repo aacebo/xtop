@@ -1,0 +1,14 @@
+<mat-selection-list
+  dense
+  (selectionChange)="onColumnSelectionChange($event)"
+>
+  <h3 matSubheader>Columns</h3>
+  <mat-list-option
+    disableRipple
+    *ngFor="let col of columns$ | async"
+    [selected]="col.visible"
+    [value]="col.prop"
+  >
+    {{ col.name }}
+  </mat-list-option>
+</mat-selection-list>

@@ -2,6 +2,7 @@
 <app-sidenav
   [items]="navItems"
   [isMac]="system.isMac$ | async"
+  (settings)="onSettings()"
 >
   <router-outlet></router-outlet>
 </app-sidenav>

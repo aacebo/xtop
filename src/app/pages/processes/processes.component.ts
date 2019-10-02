@@ -4,6 +4,7 @@ import { TreeStatus } from '@swimlane/ngx-datatable';
 import { ElectronService } from '../../core/services';
 import { ProcessService, IProcess } from '../../resources/process';
 import { SystemService } from '../../resources/system';
+import { SettingsService } from '../../resources/settings';
 
 @Component({
   selector: 'app-processes',
@@ -15,6 +16,7 @@ export class ProcessesComponent implements OnInit {
   constructor(
     readonly process: ProcessService,
     readonly system: SystemService,
+    readonly settings: SettingsService,
     private readonly _electron: ElectronService,
   ) { }
 

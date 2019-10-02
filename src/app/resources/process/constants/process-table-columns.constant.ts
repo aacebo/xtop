@@ -1,9 +1,9 @@
-import { BytesToStringPipe } from '../bytes-to-string';
-import { PriorityToStringPipe } from '../priority-to-string';
+import { BytesToStringPipe } from '../../../features/bytes-to-string';
+import { PriorityToStringPipe } from '../../../features/priority-to-string';
+import { ElapseTimeToStringPipe } from '../../../features/elapse-time-to-string';
+import { ProcessStateToStringPipe } from '../../../features/process-state-to-string';
 
-import { IProcessTableColumn } from './process-table-column.interface';
-import { ElapseTimeToStringPipe } from '../elapse-time-to-string';
-import { ProcessStateToStringPipe } from '../process-state-to-string';
+import { IProcessTableColumn } from '../models';
 
 export const PROCESS_TABLE_COLUMNS: { [prop: string]: IProcessTableColumn } = {
   name: {
@@ -13,6 +13,7 @@ export const PROCESS_TABLE_COLUMNS: { [prop: string]: IProcessTableColumn } = {
     sortable: true,
     filterable: true,
     isTreeColumn: true,
+    visible: true,
     treeLevelIndent: 20,
   },
   user: {
@@ -21,18 +22,21 @@ export const PROCESS_TABLE_COLUMNS: { [prop: string]: IProcessTableColumn } = {
     width: 80,
     sortable: true,
     filterable: true,
+    visible: true,
   },
   cpu: {
     name: 'CPU %',
     prop: 'cpu',
     width: 80,
     sortable: true,
+    visible: true,
   },
   mem: {
     name: 'Memory %',
     prop: 'mem',
     width: 80,
     sortable: true,
+    visible: true,
   },
   priority: {
     name: 'Priority',
@@ -80,6 +84,7 @@ export const PROCESS_TABLE_COLUMNS: { [prop: string]: IProcessTableColumn } = {
     prop: 'etime',
     width: 200,
     sortable: true,
+    visible: true,
     pipe: new ElapseTimeToStringPipe(),
   },
 };

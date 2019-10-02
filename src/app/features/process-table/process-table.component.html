@@ -19,7 +19,7 @@
   (tableContextmenu)="onContextMenu($event)"
 >
   <ngx-datatable-column
-    *ngFor="let col of Columns"
+    *ngFor="let col of columnsIterable"
     [name]="col.name"
     [prop]="col.prop"
     [width]="col.width"
@@ -90,7 +90,7 @@
     </div>
 
     <mat-icon
-      *ngIf="PROCESS_TABLE_COLUMNS[column.prop].filterable"
+      *ngIf="columns[column.prop].filterable"
       class="ngx-datatable--custom-header-cell--search-icon fas fa-search"
       inline
       (click)="onSearch(column.prop, $event)"

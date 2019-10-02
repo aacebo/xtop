@@ -4,6 +4,7 @@ import { ISidenavItem } from './features/sidenav';
 import { ElectronService } from './core/services';
 import { SystemService, ISystem } from './resources/system';
 import { ProcessService } from './resources/process';
+import { SettingsDialogService } from './features/settings-dialog';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +22,7 @@ export class AppComponent implements OnInit {
     readonly system: SystemService,
     private readonly _process: ProcessService,
     private readonly _electron: ElectronService,
+    private readonly _settingsDialog: SettingsDialogService,
   ) { }
 
   ngOnInit() {
@@ -29,5 +31,9 @@ export class AppComponent implements OnInit {
     this._electron.on('system', (sys: ISystem) => {
       this.system.add(sys);
     });
+  }
+
+  onSettings() {
+    this._settingsDialog.open();
   }
 }
