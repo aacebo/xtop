@@ -18,6 +18,7 @@ export interface IProcess {
   readonly state: ProcessStateCode;
   readonly wchan: string;
   readonly cpuTime: number;
+  readonly comm: string;
   readonly command: string;
 
   children: number;

@@ -21,6 +21,7 @@ export class Tasks {
     { key: 'state', label: 'state' },
     { key: 'wchan', label: 'wchan' },
     { key: 'cputime', label: 'cpuTime', formatter: formatters.etime },
+    { key: 'comm', label: 'comm' },
     { key: 'command', label: 'command' },
   ];
 
