@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatButtonModule, MatIconModule, MatTooltipModule, MatBadgeModule } from '@angular/material';
+import { MatButtonModule, MatIconModule, MatBadgeModule } from '@angular/material';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { ProcessTableComponent } from './process-table.component';
@@ -17,7 +17,6 @@ import { ProcessDialogModule } from '../process-dialog';
     CommonModule,
     MatButtonModule,
     MatIconModule,
-    MatTooltipModule,
     MatBadgeModule,
 
     NgxDatatableModule,

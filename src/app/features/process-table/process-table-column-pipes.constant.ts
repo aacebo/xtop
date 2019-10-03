@@ -5,6 +5,7 @@ import {
   ElapseTimeToStringPipe,
   PriorityToStringPipe,
   ProcessStateToStringPipe,
+  CommandToNamePipe,
 } from '../../core/pipes';
 
 export const PROCESS_TABLE_COLUMN_PIPES: { [prop: string]: PipeTransform } = {
@@ -14,5 +15,6 @@ export const PROCESS_TABLE_COLUMN_PIPES: { [prop: string]: PipeTransform } = {
   state: new ProcessStateToStringPipe(),
   etime: new ElapseTimeToStringPipe(),
   cpuTime: new ElapseTimeToStringPipe(),
+  command: new CommandToNamePipe(),
 };
 

@@ -1,7 +1,7 @@
 import { subDays, subHours, subMinutes, subSeconds } from 'date-fns';
 
-export function etimeFormatter(etime: string) {
-  const arr = etime.split('-');
+export function etime(time: string) {
+  const arr = time.split('-');
   const days = arr.length === 2 ? +arr[0] : undefined;
   const times = (arr.length === 2 ? arr[1] : arr[0]).split(':');
   const hours = +times[times.length - 3];

@@ -1,10 +1,10 @@
 import { IProcessTableColumn } from '../models';
 
 export const PROCESS_TABLE_COLUMNS: { [prop: string]: IProcessTableColumn } = {
-  name: {
+  command: {
     index: 0,
     name: 'Name',
-    prop: 'name',
+    prop: 'command',
     width: 300,
     sortable: true,
     filterable: true,

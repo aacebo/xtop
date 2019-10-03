@@ -14,6 +14,5 @@ export interface ITask {
   readonly state: string;
   readonly wchan: string;
   readonly cpuTime: number;
-  readonly name: string;
   readonly command: string;
 }

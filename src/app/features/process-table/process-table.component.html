@@ -68,9 +68,8 @@
       [matBadge]="row.children"
       [matBadgeHidden]="row.children === 0 || row.treeStatus === 'expanded'"
       matBadgeSize="small"
-      [matTooltip]="row.command"
     >
-      {{ row[column.prop] }}
+      {{ column.pipe.transform(row[column.prop]) }}
     </span>
   </div>
 </ng-template>

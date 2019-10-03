@@ -15,13 +15,12 @@ export class Tasks {
     { key: 'rss', label: 'rss', formatter: formatters.kbToBytes },
     { key: '%cpu', label: 'cpu' },
     { key: '%mem', label: 'mem' },
-    { key: 'etime', label: 'etime', formatter: formatters.etimeFormatter },
+    { key: 'etime', label: 'etime', formatter: formatters.etime },
     { key: 'pri', label: 'priority' },
     { key: 'nlwp', label: 'threads', mac: false },
     { key: 'state', label: 'state' },
     { key: 'wchan', label: 'wchan' },
-    { key: 'cputime', label: 'cpuTime', formatter: formatters.etimeFormatter },
-    { key: 'comm', label: 'name' },
+    { key: 'cputime', label: 'cpuTime', formatter: formatters.etime },
     { key: 'command', label: 'command' },
   ];
 
