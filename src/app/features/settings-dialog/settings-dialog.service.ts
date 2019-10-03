@@ -13,6 +13,7 @@ export class SettingsDialogService {
     return this._dialog.open(SettingsDialogComponent, {
       minWidth: '50%',
       maxHeight: '80%',
+      position: { top: '50px' },
     });
   }
 }

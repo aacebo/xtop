@@ -11,6 +11,9 @@ export class ConfirmDialogService {
   constructor(private readonly _dialog: MatDialog) { }
 
   open(options: IConfirmDialogOptions) {
-    return this._dialog.open(ConfirmDialogComponent, { data: options });
+    return this._dialog.open(ConfirmDialogComponent, {
+      position: { top: '50px' },
+      data: options,
+    });
   }
 }

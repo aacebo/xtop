@@ -13,5 +13,6 @@ export const PROCESS_TABLE_COLUMN_PIPES: { [prop: string]: PipeTransform } = {
   vsz: new BytesToStringPipe(),
   state: new ProcessStateToStringPipe(),
   etime: new ElapseTimeToStringPipe(),
+  cpuTime: new ElapseTimeToStringPipe(),
 };
 

@@ -80,12 +80,26 @@ export const PROCESS_TABLE_COLUMNS: { [prop: string]: IProcessTableColumn } = {
     width: 100,
     sortable: true,
   },
-  etime: {
+  wchan: {
     index: 10,
+    name: 'WCHAN',
+    prop: 'wchan',
+    width: 80,
+    sortable: true,
+  },
+  etime: {
+    index: 11,
     name: 'Started',
     prop: 'etime',
     width: 200,
     sortable: true,
     visible: true,
+  },
+  cpuTime: {
+    index: 12,
+    name: 'CPU Time',
+    prop: 'cpuTime',
+    width: 200,
+    sortable: true,
   },
 };

@@ -9,4 +9,10 @@ export const PROCESS_STATE_CODE: { [state in ProcessStateCode]: string } = {
   [ProcessStateCode.Dead]: 'Dead',
   [ProcessStateCode.Zombie]: 'Zombie',
   [ProcessStateCode.Idle]: 'Idle',
+  [ProcessStateCode.HighPriority]: 'High Priority',
+  [ProcessStateCode.LowPriority]: 'Low Priority',
+  [ProcessStateCode.PagesLocked]: 'Pages Locked in Memory',
+  [ProcessStateCode.SessionLeader]: 'Session Leader',
+  [ProcessStateCode.MultiThreaded]: 'Multi-Threaded',
+  [ProcessStateCode.Foreground]: 'In Foreground Process Group',
 };

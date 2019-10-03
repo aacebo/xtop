@@ -3,8 +3,12 @@
     position: fixed;
     bottom: 10px;
     left: 17px;
-    color: #fff;
     font-size: 20px;
     z-index: 1;
+    color: grey;
+
+    &:hover {
+      color: white;
+    }
   }
 }

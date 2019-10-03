@@ -6,6 +6,7 @@ import { IProcess, IProcessTableColumn } from '../../resources/process';
 import { ContextMenuService, IContextMenuOption } from '../context-menu';
 import { SearchService } from '../search';
 import { ConfirmDialogService } from '../confirm-dialog';
+import { ProcessDialogService } from '../process-dialog';
 
 import { IProcessTableAction } from './process-table-action.interface';
 import { PROCESS_TABLE_COLUMN_PIPES } from './process-table-column-pipes.constant';
@@ -61,6 +62,7 @@ export class ProcessTableComponent {
     private readonly _contextMenu: ContextMenuService,
     private readonly _search: SearchService,
     private readonly _confirmDialog: ConfirmDialogService,
+    private readonly _processDialog: ProcessDialogService,
   ) { }
 
   getRowId(p: IProcess) {
@@ -151,6 +153,6 @@ export class ProcessTableComponent {
   }
 
   private _onInfo() {
-    console.log('info');
+    this._processDialog.open(this.selected$.value[0]);
   }
 }

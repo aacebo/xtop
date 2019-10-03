@@ -25,4 +25,9 @@ mat-list {
   bottom: 50px;
   left: 17px;
   font-size: 20px;
+  color: grey;
+
+  &:hover {
+    color: white;
+  }
 }

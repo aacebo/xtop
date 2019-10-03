@@ -8,6 +8,7 @@ import { ProcessTableComponent } from './process-table.component';
 import { ContextMenuModule } from '../context-menu';
 import { SearchModule } from '../search';
 import { ConfirmDialogModule } from '../confirm-dialog';
+import { ProcessDialogModule } from '../process-dialog';
 
 @NgModule({
   declarations: [ProcessTableComponent],
@@ -23,6 +24,7 @@ import { ConfirmDialogModule } from '../confirm-dialog';
     ContextMenuModule,
     SearchModule,
     ConfirmDialogModule,
+    ProcessDialogModule,
   ],
 })
 export class ProcessTableModule { }

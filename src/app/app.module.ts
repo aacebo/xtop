@@ -21,6 +21,7 @@ import { ContextMenuModule } from './features/context-menu';
 import { SearchModule } from './features/search';
 import { ConfirmDialogModule } from './features/confirm-dialog';
 import { SettingsDialogModule } from './features/settings-dialog';
+import { ProcessDialogModule } from './features/process-dialog';
 
 @NgModule({
   declarations: [AppComponent],
@@ -47,6 +48,7 @@ import { SettingsDialogModule } from './features/settings-dialog';
     SearchModule,
     ConfirmDialogModule,
     SettingsDialogModule,
+    ProcessDialogModule,
   ],
 })
 export class AppModule { }

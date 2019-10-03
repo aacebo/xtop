@@ -19,6 +19,8 @@ export class Tasks {
     { key: 'pri', label: 'priority' },
     { key: 'nlwp', label: 'threads', mac: false },
     { key: 'state', label: 'state' },
+    { key: 'wchan', label: 'wchan' },
+    { key: 'cputime', label: 'cpuTime', formatter: formatters.etimeFormatter },
     { key: 'comm', label: 'name' },
     { key: 'command', label: 'command' },
   ];

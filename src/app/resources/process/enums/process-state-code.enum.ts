@@ -7,4 +7,10 @@ export enum ProcessStateCode {
   Dead = 'X',
   Zombie = 'Z',
   Idle = 'I',
+  HighPriority = '<',
+  LowPriority = 'N',
+  PagesLocked = 'L',
+  SessionLeader = 's',
+  MultiThreaded = 'l',
+  Foreground = '+',
 }
