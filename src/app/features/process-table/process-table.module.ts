@@ -18,8 +18,8 @@ import { ProcessDialogModule } from '../process-dialog';
     MatButtonModule,
     MatIconModule,
     MatBadgeModule,
-
     NgxDatatableModule,
+
     ContextMenuModule,
     SearchModule,
     ConfirmDialogModule,

@@ -1,1 +1,3 @@
-<h4 mat-dialog-title>{{ data.process.name }} ({{ data.process.pid }})</h4>
+<h4 mat-dialog-title>
+  {{ data.process | commandToName: (system.isMac$ | async) }} ({{ data.process.pid }})
+</h4>

@@ -12,6 +12,13 @@ const routes: Routes = [
       subscription: SubscriptionResolver,
     },
   },
+  {
+    path: 'memory',
+    loadChildren: () => import('./pages/memory/memory.module').then(v => v.MemoryModule),
+    resolve: {
+      subscription: SubscriptionResolver,
+    },
+  },
 ];
 
 @NgModule({

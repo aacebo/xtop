@@ -2,6 +2,7 @@ import { Component, ChangeDetectionStrategy, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material';
 
 import { IProcess } from '../../resources/process';
+import { SystemService } from '../../resources/system';
 
 @Component({
   selector: 'app-process-dialog',
@@ -12,5 +13,6 @@ import { IProcess } from '../../resources/process';
 export class ProcessDialogComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) readonly data: { process: IProcess },
+    readonly system: SystemService,
   ) { }
 }

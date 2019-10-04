@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material';
 
 import { ProcessDialogComponent } from './process-dialog.component';
+import { CommandToNameModule } from '../../core/pipes';
 
 @NgModule({
   declarations: [ProcessDialogComponent],
@@ -10,6 +11,7 @@ import { ProcessDialogComponent } from './process-dialog.component';
   imports: [
     CommonModule,
     MatDialogModule,
+    CommandToNameModule,
   ],
 })
 export class ProcessDialogModule { }

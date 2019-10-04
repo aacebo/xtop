@@ -6,7 +6,7 @@ import { ITasksColumn } from './tasks-column.interface';
 const exec = util.promisify(cp.exec);
 
 export async function find(cols: ITasksColumn[]) {
-  let cmd = 'ps -A -o ';
+  let cmd = 'ps -A -ww -o ';
 
   if (process.platform === 'darwin') {
     cols = cols.filter(c => c.mac !== false);
@@ -20,7 +20,7 @@ export async function find(cols: ITasksColumn[]) {
     }
   }
 
-  const { stderr, stdout } = await exec(`${cmd} | sed 's/  */ /g'`);
+  const { stderr, stdout } = await exec(`${cmd} | sed 's/  */|/g'`);
 
   if (stderr) {
     console.error(stderr);
@@ -31,10 +31,16 @@ export async function find(cols: ITasksColumn[]) {
   lines.shift();
   const data = [];
 
-  for (const line of lines) {
+  for (let line of lines) {
     if (line) {
-      const map: any = { };
-      const args = line.trim().split(' ', cols.length);
+      line = line.trim();
+
+      if (line[0] === '|') {
+        line = line.slice(1, line.length);
+      }
+
+      const map = { };
+      const args = line.split('|', cols.length);
 
       for (let i = 0; i < cols.length; i++) {
         const v = isNaN(+args[i]) ? args[i] : +args[i];
