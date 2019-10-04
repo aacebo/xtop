@@ -8,8 +8,8 @@ import * as fs from 'fs';
 
 const pkg = require('../../package.json');
 
-import { Processes } from './processes';
 import { Settings } from './settings';
+import * as Subs from './subscriptions';
 
 export class App {
   private _window: BrowserWindow;
@@ -88,17 +88,23 @@ export class App {
     }
 
     this._window.on('closed', () => {
-      Processes.unregister();
+      this.deconscructor();
       this._window = null;
     });
 
     Settings.register();
-    Processes.register(ps => {
+    Subs.Processes.register(ps => {
       this._window.webContents.send('processes', ps);
+    });
+
+    Subs.Memory.register(mem => {
+      this._window.webContents.send('memory', mem);
     });
   }
 
   deconscructor() {
-    Processes.unregister();
+    Subs.Processes.unregister();
+    Subs.Memory.unregister();
+    Settings.unregister();
   }
 }

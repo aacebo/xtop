@@ -1,7 +1,9 @@
-import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Router } from '@angular/router';
 import { TreeStatus } from '@swimlane/ngx-datatable';
 
 import { ElectronService } from '../../core/services';
+import { PageTemplate } from '../../core/templates';
 import { ProcessService, IProcess } from '../../resources/process';
 import { SystemService } from '../../resources/system';
 import { SettingsService } from '../../resources/settings';
@@ -12,18 +14,17 @@ import { SettingsService } from '../../resources/settings';
   styleUrls: ['./processes.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProcessesComponent implements OnInit {
+export class ProcessesComponent extends PageTemplate {
   constructor(
+    readonly router: Router,
     readonly process: ProcessService,
     readonly system: SystemService,
     readonly settings: SettingsService,
-    private readonly _electron: ElectronService,
-  ) { }
+    readonly electron: ElectronService,
+  ) { super(router, electron); }
 
-  ngOnInit() {
-    this._electron.on('processes', (ps: IProcess[]) => {
-      this.process.add(ps);
-    });
+  onSubscription(p: IProcess[]) {
+    this.process.add(p);
   }
 
   onTreeStatusChanged(e: { pid: number; status: TreeStatus }) {
@@ -35,7 +36,7 @@ export class ProcessesComponent implements OnInit {
   }
 
   onKill(pids: number[]) {
-    this._electron.send('processes.kill', pids);
+    this.electron.send('processes.kill', pids);
     this.process.remove(pids);
   }
 }

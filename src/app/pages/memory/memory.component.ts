@@ -1,4 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { PageTemplate } from '../../core/templates';
+import { ElectronService } from '../../core/services';
+import { MemoryService, IMemory } from '../../resources/memory';
 
 @Component({
   selector: 'app-memory',
@@ -6,11 +11,14 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./memory.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MemoryComponent implements OnInit {
+export class MemoryComponent extends PageTemplate {
+  constructor(
+    readonly router: Router,
+    readonly memory: MemoryService,
+    readonly electron: ElectronService,
+  ) { super(router, electron); }
 
-  constructor() { }
-
-  ngOnInit() {
+  onSubscription(mem: IMemory) {
+    this.memory.add(mem);
   }
-
 }

@@ -1,6 +1,6 @@
 import { ipcMain, Event } from 'electron';
 
-import { Tasks } from './tasks';
+import { Tasks } from '../tasks';
 
 export class Processes {
   private static _timer: NodeJS.Timer;
@@ -8,6 +8,7 @@ export class Processes {
 
   static register(cb: (ps: any[]) => void) {
     this._cb = cb;
+
     ipcMain.on('processes.subscribe', this._subscribe.bind(this));
     ipcMain.on('processes.unsubscribe', this._unsubscribe.bind(this));
     ipcMain.on('processes.kill', this._kill.bind(this));
@@ -15,9 +16,6 @@ export class Processes {
 
   static unregister() {
     this._unsubscribe();
-    ipcMain.removeAllListeners('processes.subscribe');
-    ipcMain.removeAllListeners('processes.subscribe');
-    ipcMain.removeAllListeners('processes.kill');
   }
 
   private static async _subscribe() {
@@ -29,13 +27,14 @@ export class Processes {
   }
 
   private static _unsubscribe() {
-    this._timer.unref();
-    clearInterval(this._timer);
-    this._timer = undefined;
+    if (this._timer) {
+      this._timer.unref();
+      clearInterval(this._timer);
+      this._timer = undefined;
+    }
   }
 
   private static async _kill(_: Event, pids: number[]) {
-    console.log(pids);
     await Tasks.kill(pids);
   }
 }

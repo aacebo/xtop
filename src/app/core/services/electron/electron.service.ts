@@ -60,4 +60,8 @@ export class ElectronService {
       });
     });
   }
+
+  removeAllListeners(channel: string) {
+    this._renderer.removeAllListeners(channel);
+  }
 }
