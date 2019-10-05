@@ -17,11 +17,17 @@ export class Memory {
   }
 
   private static async _subscribe() {
-    osu.mem.info().then(i => this._cb(i));
+    osu.mem.info().then(i => this._cb({
+      ...i,
+      createdAt: new Date().getTime(),
+    }));
 
     this._timer = setInterval(async () => {
-      osu.mem.info().then(i => this._cb(i));
-    }, 3000);
+      osu.mem.info().then(i => this._cb({
+        ...i,
+        createdAt: new Date().getTime(),
+      }));
+    }, 1000);
   }
 
   private static _unsubscribe() {

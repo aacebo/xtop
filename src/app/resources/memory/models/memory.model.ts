@@ -3,4 +3,5 @@ export interface IMemory {
   readonly freeMemPercentage: number;
   readonly totalMemMb: number;
   readonly usedMemMb: number;
+  readonly createdAt: number;
 }

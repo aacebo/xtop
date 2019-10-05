@@ -1,1 +1,18 @@
-<p>memory works!</p>
+<ng-container *ngIf="memory.memory$ | async; let memory">
+  <app-pie-chart
+    [data]="pieChart$ | async"
+    [doughnut]="true"
+    [colors]="colors"
+  ></app-pie-chart>
+
+  <app-line-chart
+    yLabel="MB"
+    [showYLabel]="true"
+    [showGridLines]="false"
+    [showY]="true"
+    [data]="lineChart$ | async"
+    [colors]="colors"
+    [yMin]="0"
+    [yMax]="memory.totalMemMb"
+  ></app-line-chart>
+</ng-container>
