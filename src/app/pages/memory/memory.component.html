@@ -1,18 +1,34 @@
-<ng-container *ngIf="memory.memory$ | async; let memory">
-  <app-pie-chart
-    [data]="pieChart$ | async"
-    [doughnut]="true"
-    [colors]="colors"
-  ></app-pie-chart>
+<app-grid *ngIf="memory.memory$ | async">
+  <app-grid-row>
+    <app-grid-column>
+      <app-pie-chart
+        [data]="usagePieChart$ | async"
+        [doughnut]="true"
+        [colors]="colors"
+      ></app-pie-chart>
+    </app-grid-column>
 
-  <app-line-chart
-    yLabel="MB"
-    [showYLabel]="true"
-    [showGridLines]="false"
-    [showY]="true"
-    [data]="lineChart$ | async"
-    [colors]="colors"
-    [yMin]="0"
-    [yMax]="memory.total"
-  ></app-line-chart>
-</ng-container>
+    <app-grid-column>
+      <app-pie-chart
+        [data]="swapPieChart$ | async"
+        [doughnut]="true"
+        [colors]="colors"
+      ></app-pie-chart>
+    </app-grid-column>
+  </app-grid-row>
+
+  <app-grid-row>
+    <app-grid-column>
+      <app-line-chart
+        yLabel="% Usage"
+        [showYLabel]="true"
+        [showGridLines]="false"
+        [showY]="true"
+        [data]="usageLineChart$ | async"
+        [colors]="colors"
+        [yMin]="0"
+        [yMax]="100"
+      ></app-line-chart>
+    </app-grid-column>
+  </app-grid-row>
+</app-grid>

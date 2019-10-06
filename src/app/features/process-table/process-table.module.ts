@@ -5,7 +5,6 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { ProcessTableComponent } from './process-table.component';
 
-import { ContextMenuModule } from '../context-menu';
 import { SearchModule } from '../search';
 import { ConfirmDialogModule } from '../confirm-dialog';
 import { ProcessDialogModule } from '../process-dialog';
@@ -20,7 +19,6 @@ import { ProcessDialogModule } from '../process-dialog';
     MatBadgeModule,
     NgxDatatableModule,
 
-    ContextMenuModule,
     SearchModule,
     ConfirmDialogModule,
     ProcessDialogModule,

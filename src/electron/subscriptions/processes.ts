@@ -3,9 +3,9 @@ import * as si from 'systeminformation';
 
 export class Processes {
   private static _timer: NodeJS.Timer;
-  private static _cb: (...args) => void;
+  private static _cb: (...args: any[]) => void;
 
-  static register(cb: (...args) => void) {
+  static register(cb: (...args: any[]) => void) {
     this._cb = cb;
 
     ipcMain.on('processes.subscribe', this._subscribe.bind(this));

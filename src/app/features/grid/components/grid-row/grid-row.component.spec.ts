@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ContextMenuComponent } from './context-menu.component';
+import { GridRowComponent } from './grid-row.component';
 
-describe('ContextMenuComponent', () => {
-  let component: ContextMenuComponent;
-  let fixture: ComponentFixture<ContextMenuComponent>;
+describe('GridRowComponent', () => {
+  let component: GridRowComponent;
+  let fixture: ComponentFixture<GridRowComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ContextMenuComponent ],
+      declarations: [ GridRowComponent ],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ContextMenuComponent);
+    fixture = TestBed.createComponent(GridRowComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

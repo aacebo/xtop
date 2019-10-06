@@ -17,7 +17,6 @@ import { environment } from '../environments/environment';
 
 import { SidenavModule } from './features/sidenav';
 import { ToolbarModule } from './features/toolbar';
-import { ContextMenuModule } from './features/context-menu';
 import { SearchModule } from './features/search';
 import { ConfirmDialogModule } from './features/confirm-dialog';
 import { SettingsDialogModule } from './features/settings-dialog';
@@ -44,7 +43,6 @@ import { ProcessDialogModule } from './features/process-dialog';
     ResourcesModule,
     SidenavModule,
     ToolbarModule,
-    ContextMenuModule,
     SearchModule,
     ConfirmDialogModule,
     SettingsDialogModule,

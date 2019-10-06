@@ -15,8 +15,9 @@ import { MemoryService, IMemory } from '../../resources/memory';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MemoryComponent extends PageTemplate {
-  readonly pieChart$: Observable<SingleSeries>;
-  readonly lineChart$: Observable<MultiSeries>;
+  readonly usagePieChart$: Observable<SingleSeries>;
+  readonly swapPieChart$: Observable<SingleSeries>;
+  readonly usageLineChart$: Observable<MultiSeries>;
   readonly colors = { domain: ['#FF0000', '#00FF00'] };
 
   constructor(
@@ -26,23 +27,33 @@ export class MemoryComponent extends PageTemplate {
   ) {
     super(router, electron);
 
-    this.pieChart$ = this.memory.memory$.pipe(
+    this.usagePieChart$ = this.memory.memory$.pipe(
       map(m => m ? [{
-        name: 'Memory Usage',
-        value: m.used,
+        name: '% Memory Used',
+        value: Math.round((m.used / m.total) * 100),
       }, {
-        name: 'Memory Free',
-        value: m.free,
+        name: '% Memory Free',
+        value: Math.round((m.free / m.total) * 100),
       }] : []),
     );
 
-    this.lineChart$ = this.memory.entities$.pipe(
+    this.swapPieChart$ = this.memory.memory$.pipe(
+      map(m => m ? [{
+        name: '% Swap Used',
+        value: Math.round((m.swapused / m.swaptotal) * 100),
+      }, {
+        name: '% Swap Free',
+        value: Math.round((m.swapfree / m.swaptotal) * 100),
+      }] : []),
+    );
+
+    this.usageLineChart$ = this.memory.entities$.pipe(
       map(m => (m && m.length > 0) ? m.map(v => ({
         name: new Date(v.createdAt).toLocaleString(),
-        value: v.used,
+        value: Math.round((v.used / v.total) * 100),
       })) : []),
       map(e => [{
-        name: 'Memory Usage (MB)',
+        name: '% Memory Used',
         series: e,
       }]),
     );

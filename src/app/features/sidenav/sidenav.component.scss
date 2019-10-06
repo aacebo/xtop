@@ -10,6 +10,10 @@ mat-list {
   &.mac {
     margin-top: 20px;
   }
+
+  mat-list-item {
+    outline: none;
+  }
 }
 
 .route-link {

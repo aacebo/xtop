@@ -3,7 +3,6 @@ import { ColumnMode, SelectionType, DatatableComponent, TreeStatus, ContextmenuT
 import { BehaviorSubject } from 'rxjs';
 
 import { IProcess, IProcessTableColumn } from '../../resources/process';
-import { ContextMenuService, IContextMenuOption } from '../context-menu';
 import { SearchService } from '../search';
 import { ConfirmDialogService } from '../confirm-dialog';
 import { ProcessDialogService } from '../process-dialog';
@@ -50,16 +49,7 @@ export class ProcessTableComponent {
     },
   ];
 
-  private get contextMenuOptions(): IContextMenuOption[] {
-    return this.actions.filter(a => !a.condition || (a.condition && a.condition()))
-                       .map(a => ({
-      text: a.name,
-      muted: `${a.ctrl ? 'Ctrl+' : ''}${a.key}`,
-    }));
-  }
-
   constructor(
-    private readonly _contextMenu: ContextMenuService,
     private readonly _search: SearchService,
     private readonly _confirmDialog: ConfirmDialogService,
     private readonly _processDialog: ProcessDialogService,
@@ -85,13 +75,6 @@ export class ProcessTableComponent {
       pid: e.row.pid,
       status: e.row.treeStatus,
     });
-  }
-
-  onContextMenu(e: { event: MouseEvent; type: ContextmenuType; content: IProcess }) {
-    if (e.type === ContextmenuType.body && this.selected$.value.length > 0) {
-      const ref = this._contextMenu.open(this.contextMenuOptions, e.event.x, e.event.y);
-      ref.closed.subscribe(this._onContextMenuClosed.bind(this));
-    }
   }
 
   onSearch(prop: keyof IProcess, e: Event) {
@@ -120,13 +103,6 @@ export class ProcessTableComponent {
           return;
         }
       }
-    }
-  }
-
-  private _onContextMenuClosed(o: IContextMenuOption) {
-    if (o) {
-      const action = this.actions.find(a => a.name === o.text);
-      action.cb();
     }
   }
 

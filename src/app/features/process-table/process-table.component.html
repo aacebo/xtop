@@ -12,11 +12,10 @@
   [limit]="5"
   [selectionType]="SelectionType.multi"
   [selected]="selected$ | async"
-  [sorts]="[{ prop: 'cpu', dir: 'desc' }]"
+  [sorts]="[{ prop: 'pcpu', dir: 'desc' }]"
   [treeFromRelation]="'parentPid'"
   [treeToRelation]="'pid'"
   (treeAction)="onTreeAction($event)"
-  (tableContextmenu)="onContextMenu($event)"
 >
   <ngx-datatable-column
     *ngFor="let col of columnsIterable"
