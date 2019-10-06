@@ -2,19 +2,10 @@ import { PipeTransform } from '@angular/core';
 
 import {
   BytesToStringPipe,
-  ElapseTimeToStringPipe,
-  PriorityToStringPipe,
-  ProcessStateToStringPipe,
-  CommandToNamePipe,
 } from '../../core/pipes';
 
 export const PROCESS_TABLE_COLUMN_PIPES: { [prop: string]: PipeTransform } = {
-  priority: new PriorityToStringPipe(),
-  rss: new BytesToStringPipe(),
-  vsz: new BytesToStringPipe(),
-  state: new ProcessStateToStringPipe(),
-  etime: new ElapseTimeToStringPipe(),
-  cpuTime: new ElapseTimeToStringPipe(),
-  command: new CommandToNamePipe(),
+  mem_rss: new BytesToStringPipe(),
+  mem_vsz: new BytesToStringPipe(),
 };
 

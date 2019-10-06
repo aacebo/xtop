@@ -1,10 +1,10 @@
 import { IProcessTableColumn } from '../models';
 
 export const PROCESS_TABLE_COLUMNS: { [prop: string]: IProcessTableColumn } = {
-  command: {
+  name: {
     index: 0,
     name: 'Name',
-    prop: 'command',
+    prop: 'name',
     width: 300,
     sortable: true,
     filterable: true,
@@ -21,18 +21,18 @@ export const PROCESS_TABLE_COLUMNS: { [prop: string]: IProcessTableColumn } = {
     filterable: true,
     visible: true,
   },
-  cpu: {
+  pcpu: {
     index: 2,
     name: 'CPU %',
-    prop: 'cpu',
+    prop: 'pcpu',
     width: 80,
     sortable: true,
     visible: true,
   },
-  mem: {
+  pmem: {
     index: 3,
     name: 'Memory %',
-    prop: 'mem',
+    prop: 'pmem',
     width: 80,
     sortable: true,
     visible: true,
@@ -44,17 +44,17 @@ export const PROCESS_TABLE_COLUMNS: { [prop: string]: IProcessTableColumn } = {
     width: 80,
     sortable: true,
   },
-  rss: {
+  mem_rss: {
     index: 5,
     name: 'RSS',
-    prop: 'rss',
+    prop: 'mem_rss',
     width: 80,
     sortable: true,
   },
-  vsz: {
+  mem_vsz: {
     index: 6,
     name: 'VSZ',
-    prop: 'vsz',
+    prop: 'mem_vsz',
     width: 80,
     sortable: true,
   },
@@ -66,13 +66,6 @@ export const PROCESS_TABLE_COLUMNS: { [prop: string]: IProcessTableColumn } = {
     sortable: true,
     filterable: true,
   },
-  threads: {
-    index: 8,
-    name: 'Threads',
-    prop: 'threads',
-    width: 80,
-    sortable: true,
-  },
   state: {
     index: 9,
     name: 'Status',
@@ -80,26 +73,12 @@ export const PROCESS_TABLE_COLUMNS: { [prop: string]: IProcessTableColumn } = {
     width: 100,
     sortable: true,
   },
-  wchan: {
-    index: 10,
-    name: 'WCHAN',
-    prop: 'wchan',
-    width: 80,
-    sortable: true,
-  },
-  etime: {
+  started: {
     index: 11,
     name: 'Started',
-    prop: 'etime',
+    prop: 'started',
     width: 200,
     sortable: true,
     visible: true,
-  },
-  cpuTime: {
-    index: 12,
-    name: 'CPU Time',
-    prop: 'cpuTime',
-    width: 200,
-    sortable: true,
   },
 };

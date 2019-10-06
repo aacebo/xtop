@@ -1,15 +1,15 @@
 import { ipcMain } from 'electron';
 import * as si from 'systeminformation';
 
-export class Memory {
+export class Cpu {
   private static _timer: NodeJS.Timer;
   private static _cb: (...args) => void;
 
   static register(cb: (...args) => void) {
     this._cb = cb;
 
-    ipcMain.on('memory.subscribe', this._subscribe.bind(this));
-    ipcMain.on('memory.unsubscribe', this._unsubscribe.bind(this));
+    ipcMain.on('cpu.subscribe', this._subscribe.bind(this));
+    ipcMain.on('cpu.unsubscribe', this._unsubscribe.bind(this));
   }
 
   static unregister() {
@@ -17,10 +17,10 @@ export class Memory {
   }
 
   private static async _subscribe() {
-    this._cb({ ...await si.mem(), createdAt: new Date().getTime() });
+    this._cb(await si.currentLoad());
 
     this._timer = setInterval(async () => {
-      this._cb({ ...await si.mem(), createdAt: new Date().getTime() });
+      this._cb(await si.currentLoad());
     }, 1000);
   }
 

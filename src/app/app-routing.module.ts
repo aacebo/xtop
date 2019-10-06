@@ -13,6 +13,13 @@ const routes: Routes = [
     },
   },
   {
+    path: 'cpu',
+    loadChildren: () => import('./pages/cpu/cpu.module').then(v => v.CpuModule),
+    resolve: {
+      subscription: SubscriptionResolver,
+    },
+  },
+  {
     path: 'memory',
     loadChildren: () => import('./pages/memory/memory.module').then(v => v.MemoryModule),
     resolve: {

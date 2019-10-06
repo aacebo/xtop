@@ -8,10 +8,10 @@ export const mapReducer = createReducer<{ [key: number]: IProcess }>(
   on(actions.add, (_, action) => {
     const map: { [key: number]: IProcess } = { };
 
-    for (const process of action.processes) {
+    for (const process of action.processes.list) {
       const existing = _[process.pid];
 
-      if (!existing && process.ppid === 0) {
+      if (!existing && process.parentPid === 0) {
         process.treeStatus = 'expanded';
       } else {
         process.treeStatus = 'collapsed';
@@ -22,7 +22,7 @@ export const mapReducer = createReducer<{ [key: number]: IProcess }>(
       }
 
       map[process.pid] = { ...process };
-      map[process.pid].children = action.processes.filter(p => p.ppid === process.pid).length;
+      map[process.pid].children = action.processes.list.filter(p => p.parentPid === process.pid).length;
     }
 
     return map;

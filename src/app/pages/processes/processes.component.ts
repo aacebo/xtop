@@ -4,7 +4,7 @@ import { TreeStatus } from '@swimlane/ngx-datatable';
 
 import { ElectronService } from '../../core/services';
 import { PageTemplate } from '../../core/templates';
-import { ProcessService, IProcess } from '../../resources/process';
+import { ProcessService, IProcess, IProcesses } from '../../resources/process';
 import { SystemService } from '../../resources/system';
 import { SettingsService } from '../../resources/settings';
 
@@ -23,8 +23,8 @@ export class ProcessesComponent extends PageTemplate {
     readonly electron: ElectronService,
   ) { super(router, electron); }
 
-  onSubscription(p: IProcess[]) {
-    this.process.add(p);
+  onSubscription(e: IProcesses) {
+    this.process.add(e);
   }
 
   onTreeStatusChanged(e: { pid: number; status: TreeStatus }) {

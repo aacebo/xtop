@@ -21,5 +21,5 @@ export class PageTemplate implements OnInit, OnDestroy {
     this.electron.removeAllListeners(this.routeName);
   }
 
-  onSubscription(..._) { }
+  onSubscription(..._: any[]) { }
 }

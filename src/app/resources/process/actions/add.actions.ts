@@ -1,8 +1,8 @@
 import { createAction, props } from '@ngrx/store';
 
-import { IProcess } from '../models';
+import { IProcesses } from '../models';
 
 export const add = createAction(
   '[PROCESS] Add',
-  props<{ processes: IProcess[] }>(),
+  props<{ processes: IProcesses }>(),
 );

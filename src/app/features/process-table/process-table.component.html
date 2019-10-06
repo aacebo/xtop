@@ -13,7 +13,7 @@
   [selectionType]="SelectionType.multi"
   [selected]="selected$ | async"
   [sorts]="[{ prop: 'cpu', dir: 'desc' }]"
-  [treeFromRelation]="'ppid'"
+  [treeFromRelation]="'parentPid'"
   [treeToRelation]="'pid'"
   (treeAction)="onTreeAction($event)"
   (tableContextmenu)="onContextMenu($event)"
@@ -69,7 +69,7 @@
       [matBadgeHidden]="row.children === 0 || row.treeStatus === 'expanded'"
       matBadgeSize="small"
     >
-      {{ column.pipe.transform(row, isMac) }}
+      {{ row[column.prop] }}
     </span>
   </div>
 </ng-template>

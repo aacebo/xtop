@@ -100,11 +100,16 @@ export class App {
     Subs.Memory.register(mem => {
       this._window.webContents.send('memory', mem);
     });
+
+    Subs.Cpu.register(cpu => {
+      this._window.webContents.send('cpu', cpu);
+    });
   }
 
   deconscructor() {
     Subs.Processes.unregister();
     Subs.Memory.unregister();
+    Subs.Cpu.unregister();
     Settings.unregister();
   }
 }

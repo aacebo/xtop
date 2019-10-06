@@ -1,7 +1,5 @@
-export interface IMemory {
-  readonly freeMemMb: number;
-  readonly freeMemPercentage: number;
-  readonly totalMemMb: number;
-  readonly usedMemMb: number;
+import { Systeminformation } from 'systeminformation';
+
+export interface IMemory extends Systeminformation.MemData {
   readonly createdAt: number;
 }

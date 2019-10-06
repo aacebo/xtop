@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store';
 import { TreeStatus } from '@swimlane/ngx-datatable';
 import { Observable } from 'rxjs';
 
-import { IProcess } from './models';
+import { IProcess, IProcesses } from './models';
 import { IProcessState } from './process.state';
 import * as selectors from './process.selectors';
 import * as actions from './actions';
@@ -28,7 +28,7 @@ export class ProcessService {
     this.filters$ = this._store.pipe(select(selectors.selectFilters));
   }
 
-  add(processes: IProcess[]) {
+  add(processes: IProcesses) {
     this._store.dispatch(actions.add({ processes }));
   }
 

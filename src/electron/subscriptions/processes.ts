@@ -1,17 +1,15 @@
-import { ipcMain, Event } from 'electron';
-
-import { Tasks } from '../tasks';
+import { ipcMain } from 'electron';
+import * as si from 'systeminformation';
 
 export class Processes {
   private static _timer: NodeJS.Timer;
-  private static _cb: (ps: any[]) => void;
+  private static _cb: (...args) => void;
 
-  static register(cb: (ps: any[]) => void) {
+  static register(cb: (...args) => void) {
     this._cb = cb;
 
     ipcMain.on('processes.subscribe', this._subscribe.bind(this));
     ipcMain.on('processes.unsubscribe', this._unsubscribe.bind(this));
-    ipcMain.on('processes.kill', this._kill.bind(this));
   }
 
   static unregister() {
@@ -19,10 +17,10 @@ export class Processes {
   }
 
   private static async _subscribe() {
-    this._cb(await Tasks.find());
+    this._cb(await si.processes());
 
     this._timer = setInterval(async () => {
-      this._cb(await Tasks.find());
+      this._cb(await si.processes());
     }, 3000);
   }
 
@@ -32,9 +30,5 @@ export class Processes {
       clearInterval(this._timer);
       this._timer = undefined;
     }
-  }
-
-  private static async _kill(_: Event, pids: number[]) {
-    await Tasks.kill(pids);
   }
 }

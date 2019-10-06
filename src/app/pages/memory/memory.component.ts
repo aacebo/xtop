@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
-import { SingleSeries, Series, MultiSeries } from '@swimlane/ngx-charts';
+import { SingleSeries, MultiSeries } from '@swimlane/ngx-charts';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -17,7 +17,7 @@ import { MemoryService, IMemory } from '../../resources/memory';
 export class MemoryComponent extends PageTemplate {
   readonly pieChart$: Observable<SingleSeries>;
   readonly lineChart$: Observable<MultiSeries>;
-  readonly colors = { domain: ['#8b0000', '#008000'] };
+  readonly colors = { domain: ['#FF0000', '#00FF00'] };
 
   constructor(
     readonly router: Router,
@@ -28,18 +28,18 @@ export class MemoryComponent extends PageTemplate {
 
     this.pieChart$ = this.memory.memory$.pipe(
       map(m => m ? [{
-        name: '% Memory Usage',
-        value: 100 - m.freeMemPercentage,
+        name: 'Memory Usage',
+        value: m.used,
       }, {
-        name: '% Memory Free',
-        value: m.freeMemPercentage,
+        name: 'Memory Free',
+        value: m.free,
       }] : []),
     );
 
     this.lineChart$ = this.memory.entities$.pipe(
       map(m => (m && m.length > 0) ? m.map(v => ({
         name: new Date(v.createdAt).toLocaleString(),
-        value: v.usedMemMb,
+        value: v.used,
       })) : []),
       map(e => [{
         name: 'Memory Usage (MB)',
