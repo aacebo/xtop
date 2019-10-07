@@ -1,10 +1,11 @@
-<app-grid *ngIf="memory.memory$ | async">
+<app-grid *ngIf="memory.entity$ | async">
   <app-grid-row>
     <app-grid-column>
       <app-pie-chart
         [data]="usagePieChart$ | async"
         [doughnut]="true"
         [colors]="colors"
+        [animations]="true"
       ></app-pie-chart>
     </app-grid-column>
 
@@ -13,6 +14,7 @@
         [data]="swapPieChart$ | async"
         [doughnut]="true"
         [colors]="colors"
+        [animations]="true"
       ></app-pie-chart>
     </app-grid-column>
   </app-grid-row>
@@ -28,6 +30,7 @@
         [colors]="colors"
         [yMin]="0"
         [yMax]="100"
+        [animations]="true"
       ></app-line-chart>
     </app-grid-column>
   </app-grid-row>

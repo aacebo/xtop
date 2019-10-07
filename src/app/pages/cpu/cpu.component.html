@@ -1,1 +1,17 @@
-<p>cpu works!</p>
+<app-grid *ngIf="cpu.entity$ | async">
+  <app-grid-row>
+    <app-grid-column>
+      <app-line-chart
+        yLabel="% Usage"
+        [showYLabel]="true"
+        [showGridLines]="false"
+        [showY]="true"
+        [data]="usageLineChart$ | async"
+        [colors]="colors$ | async"
+        [yMin]="0"
+        [yMax]="100"
+        [animations]="true"
+      ></app-line-chart>
+    </app-grid-column>
+  </app-grid-row>
+</app-grid>

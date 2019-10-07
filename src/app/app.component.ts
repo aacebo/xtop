@@ -22,6 +22,8 @@ export class AppComponent implements OnInit {
     { icon: 'fas fa-stream', tooltip: 'Processes', route: '/processes', badge: this._process.count$ },
     { icon: 'fas fa-microchip', tooltip: 'CPU', route: '/cpu' },
     { icon: 'fas fa-memory', tooltip: 'Memory', route: '/memory' },
+    { icon: 'fas fa-hdd', tooltip: 'File Systems', route: '/file-system' },
+    { icon: 'fas fa-network-wired', tooltip: 'Network Interfaces', route: '/network-interface' },
   ];
 
   constructor(

@@ -1,8 +1,8 @@
 import { createReducer, on } from '@ngrx/store';
 
 import { environment } from '../../../../../environments/environment';
-import * as actions from '../../memory.actions';
 import { IMemory } from '../../models';
+import * as actions from '../../memory.actions';
 
 export const mapReducer = createReducer<{ [time: number]: IMemory }>(
   { },

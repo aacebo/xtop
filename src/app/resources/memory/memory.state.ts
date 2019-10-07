@@ -4,14 +4,14 @@ import { IMemory } from './models';
 import * as fromReducers from './reducers';
 
 export interface IMemoryState {
-  readonly memory?: IMemory;
+  readonly active?: number;
   readonly keys: number[];
   readonly map: { [time: number]: IMemory };
 }
 
 export function reducers(state: IMemoryState, action: Action) {
   return combineReducers<IMemoryState>({
-    memory: fromReducers.memoryReducer,
+    active: fromReducers.activeReducer,
     keys: fromReducers.keysReducer,
     map: fromReducers.mapReducer,
   })(state, action);

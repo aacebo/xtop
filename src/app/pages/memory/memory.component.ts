@@ -27,7 +27,7 @@ export class MemoryComponent extends PageTemplate {
   ) {
     super(router, electron);
 
-    this.usagePieChart$ = this.memory.memory$.pipe(
+    this.usagePieChart$ = this.memory.entity$.pipe(
       map(m => m ? [{
         name: '% Memory Used',
         value: Math.round((m.used / m.total) * 100),
@@ -37,7 +37,7 @@ export class MemoryComponent extends PageTemplate {
       }] : []),
     );
 
-    this.swapPieChart$ = this.memory.memory$.pipe(
+    this.swapPieChart$ = this.memory.entity$.pipe(
       map(m => m ? [{
         name: '% Swap Used',
         value: Math.round((m.swapused / m.swaptotal) * 100),

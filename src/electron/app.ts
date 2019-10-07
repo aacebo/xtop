@@ -104,12 +104,21 @@ export class App {
     Subs.Cpu.register(cpu => {
       this._window.webContents.send('cpu', cpu);
     });
+
+    Subs.FileSystem.register(fileSystem => {
+      this._window.webContents.send('file-system', fileSystem);
+    });
+
+    Subs.NetworkInterface.register(ni => {
+      this._window.webContents.send('network-interface', ni);
+    });
   }
 
   deconscructor() {
     Subs.Processes.unregister();
     Subs.Memory.unregister();
     Subs.Cpu.unregister();
+    Subs.NetworkInterface.unregister();
     Settings.unregister();
   }
 }

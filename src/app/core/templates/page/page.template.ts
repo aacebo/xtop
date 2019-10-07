@@ -14,6 +14,7 @@ export class PageTemplate implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    document.title = `XTop - ${this.routeName.toUpperCase().replace('-', ' ')}`;
     this.electron.on(this.routeName, this.onSubscription.bind(this));
   }
 

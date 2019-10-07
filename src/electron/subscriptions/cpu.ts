@@ -17,10 +17,16 @@ export class Cpu {
   }
 
   private static async _subscribe() {
-    this._cb(await si.currentLoad());
+    this._cb({
+      ...await si.currentLoad(),
+      createdAt: new Date().getTime(),
+    });
 
     this._timer = setInterval(async () => {
-      this._cb(await si.currentLoad());
+      this._cb({
+        ...await si.currentLoad(),
+        createdAt: new Date().getTime(),
+      });
     }, 1000);
   }
 

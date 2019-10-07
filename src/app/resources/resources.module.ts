@@ -4,6 +4,8 @@ import { ProcessModule } from './process';
 import { SystemModule } from './system';
 import { SettingsModule } from './settings';
 import { MemoryModule } from './memory';
+import { CpuModule } from './cpu';
+import { FileSystemModule } from './file-system';
 
 @NgModule({
   imports: [
@@ -11,6 +13,8 @@ import { MemoryModule } from './memory';
     SystemModule,
     SettingsModule,
     MemoryModule,
+    CpuModule,
+    FileSystemModule,
   ],
 })
 export class ResourcesModule { }

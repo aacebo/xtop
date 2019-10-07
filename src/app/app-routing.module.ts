@@ -26,6 +26,20 @@ const routes: Routes = [
       subscription: SubscriptionResolver,
     },
   },
+  {
+    path: 'file-system',
+    loadChildren: () => import('./pages/file-system/file-system.module').then(v => v.FileSystemModule),
+    resolve: {
+      subscription: SubscriptionResolver,
+    },
+  },
+  {
+    path: 'network-interface',
+    loadChildren: () => import('./pages/network-interface/network-interface.module').then(v => v.NetworkInterfaceModule),
+    resolve: {
+      subscription: SubscriptionResolver,
+    },
+  },
 ];
 
 @NgModule({
