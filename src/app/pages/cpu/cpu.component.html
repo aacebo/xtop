@@ -1,8 +1,19 @@
 <app-grid *ngIf="cpu.entity$ | async">
   <app-grid-row>
     <app-grid-column>
+      <app-pie-chart
+        [data]="usagePieChart$ | async"
+        [doughnut]="true"
+        [colors]="colors"
+        [animations]="true"
+      ></app-pie-chart>
+    </app-grid-column>
+  </app-grid-row>
+
+  <app-grid-row>
+    <app-grid-column>
       <app-line-chart
-        yLabel="% Usage"
+        yLabel="% Load"
         [showYLabel]="true"
         [showGridLines]="false"
         [showY]="true"

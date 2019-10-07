@@ -18,7 +18,7 @@ export class MemoryComponent extends PageTemplate {
   readonly usagePieChart$: Observable<SingleSeries>;
   readonly swapPieChart$: Observable<SingleSeries>;
   readonly usageLineChart$: Observable<MultiSeries>;
-  readonly colors = { domain: ['#FF0000', '#00FF00'] };
+  readonly colors = { domain: ['#A63232', '#4BB543'] };
 
   constructor(
     readonly router: Router,

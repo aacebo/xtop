@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
-import { MultiSeries } from '@swimlane/ngx-charts';
+import { MultiSeries, SingleSeries } from '@swimlane/ngx-charts';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
@@ -17,7 +17,9 @@ import { CpuService, ICurrentLoad } from '../../resources/cpu';
 })
 export class CpuComponent extends PageTemplate {
   readonly usageLineChart$: Observable<MultiSeries>;
+  readonly usagePieChart$: Observable<SingleSeries>;
   readonly colors$: Observable<{ domain: string[] }>;
+  readonly colors = { domain: ['#A63232', '#4BB543'] };
 
   constructor(
     readonly router: Router,
@@ -33,6 +35,16 @@ export class CpuComponent extends PageTemplate {
         domain: colors,
       })),
       take(1),
+    );
+
+    this.usagePieChart$ = this.cpu.entity$.pipe(
+      map(v => [{
+        name: '% CPU Load',
+        value: v.currentload,
+      }, {
+        name: '% CPU Free',
+        value: 100 - v.currentload,
+      }]),
     );
 
     this.usageLineChart$ = this.cpu.cpus$.pipe(
