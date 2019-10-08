@@ -10,6 +10,7 @@ xtop.settings.json
 /dist
 /tmp
 /out-tsc
+/packages
 # Only exists if Bazel was run
 /bazel-out
 
