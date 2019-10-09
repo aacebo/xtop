@@ -6,8 +6,6 @@ import * as os from 'os';
 import * as path from 'path';
 import * as fs from 'fs';
 
-const pkg = require('../../package.json');
-
 import { Settings } from './settings';
 import * as Subs from './subscriptions';
 
@@ -60,11 +58,6 @@ export class App {
       this._window.webContents.send('system', {
         pid: process.pid,
         platform: process.platform,
-        version: pkg.version,
-        license: pkg.license,
-        author: pkg.author,
-        name: pkg.name,
-        description: pkg.description,
       });
 
       if (fs.existsSync(Settings.path)) {
@@ -77,7 +70,7 @@ export class App {
     });
 
     this._window.loadURL(url.format({
-      pathname: `${__dirname}/../xtop/index.html`,
+      pathname: `${__dirname}/index.html`,
       protocol: 'file:',
       slashes: true,
       hash: '',

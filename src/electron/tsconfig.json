@@ -1,7 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "outDir": "../../dist/electron",
+    "outDir": "../../dist/xtop",
     "module": "commonjs",
     "types": ["node"]
   }
