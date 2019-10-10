@@ -19,7 +19,6 @@ import { PROCESS_TABLE_COLUMN_PIPES } from './process-table-column-pipes.constan
 export class ProcessTableComponent {
   @Input() processes: IProcess[] = [];
   @Input() filters: Partial<IProcess> = { };
-  @Input() isMac = false;
   @Input() columns: { [key: string]: IProcessTableColumn };
   @Input() columnsIterable: IProcessTableColumn[] = [];
 

@@ -1,7 +1,7 @@
 <app-process-table
+  [class.mac]="system.isMac$ | async"
   [processes]="process.entities$ | async"
   [filters]="process.filters$ | async"
-  [isMac]="system.isMac$ | async"
   [columns]="(settings.processes$ | async).columns"
   [columnsIterable]="settings.visibleColumns$ | async"
   (treeStatusChanged)="onTreeStatusChanged($event)"

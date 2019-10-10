@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { PageTemplate } from '../../core/templates';
 import { ElectronService } from '../../core/services';
 import { FileSystemService, IFileSystemSize } from '../../resources/file-system';
+import { SystemService } from '../../resources/system';
 
 @Component({
   selector: 'app-file-system',
@@ -16,6 +17,7 @@ export class FileSystemComponent extends PageTemplate {
     readonly router: Router,
     readonly electron: ElectronService,
     readonly fileSystem: FileSystemService,
+    readonly system: SystemService,
   ) { super(router, electron); }
 
   onSubscription(fs: IFileSystemSize[]) {

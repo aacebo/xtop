@@ -21,11 +21,6 @@ $padding: 5px;
   ngx-datatable {
     height: 100%;
 
-    &.mac {
-      top: 20px;
-      height: calc(100% - 20px);
-    }
-
     ::ng-deep .datatable-header {
       border-bottom: $border;
 

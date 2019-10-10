@@ -1,4 +1,10 @@
 :host {
   display: block;
   height: 100%;
+
+  app-process-table {
+    &.mac {
+      margin-top: 20px;
+    }
+  }
 }

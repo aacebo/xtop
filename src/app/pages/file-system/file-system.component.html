@@ -1,3 +1,4 @@
 <app-file-system-table
+  [class.mac]="system.isMac$ | async"
   [fileSystems]="fileSystem.fileSystems$ | async"
 ></app-file-system-table>
