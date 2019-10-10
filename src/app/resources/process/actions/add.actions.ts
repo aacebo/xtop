@@ -4,5 +4,5 @@ import { IProcesses } from '../models';
 
 export const add = createAction(
   '[PROCESS] Add',
-  props<{ processes: IProcesses }>(),
+  props<{ readonly processes: IProcesses }>(),
 );

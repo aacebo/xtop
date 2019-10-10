@@ -4,10 +4,10 @@ import { ISettings } from './models';
 
 export const update = createAction(
   '[SETTINGS] Update',
-  props<{ settings: ISettings }>(),
+  props<{ readonly settings: ISettings }>(),
 );
 
 export const init = createAction(
   '[SETTINGS] Initialize',
-  props<{ settings: ISettings }>(),
+  props<{ readonly settings: ISettings }>(),
 );

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { PageTemplate } from '../../core/templates';
 import { ElectronService } from '../../core/services';
+import { NetworkInterfaceService, INetworkInterfacesStats } from '../../resources/network-interface';
 
 @Component({
   selector: 'app-network-interface',
@@ -14,9 +15,10 @@ export class NetworkInterfaceComponent extends PageTemplate {
   constructor(
     readonly router: Router,
     readonly electron: ElectronService,
+    readonly networkInterface: NetworkInterfaceService,
   ) { super(router, electron); }
 
-  onSubscription(ni) {
-    console.log(ni);
+  onSubscription(stats: INetworkInterfacesStats) {
+    this.networkInterface.add(stats);
   }
 }

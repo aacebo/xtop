@@ -4,5 +4,5 @@ import { IMemory } from './models';
 
 export const add = createAction(
   '[MEMORY] Add',
-  props<{ memory: IMemory }>(),
+  props<{ readonly memory: IMemory }>(),
 );

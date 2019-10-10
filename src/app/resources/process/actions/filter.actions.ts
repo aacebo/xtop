@@ -4,5 +4,5 @@ import { IProcess } from '../models';
 
 export const filter = createAction(
   '[PROCESS] Filter',
-  props<{ prop: keyof IProcess; value: string | number }>(),
+  props<{ readonly prop: keyof IProcess; readonly value: string | number }>(),
 );

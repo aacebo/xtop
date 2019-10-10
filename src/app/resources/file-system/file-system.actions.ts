@@ -4,5 +4,5 @@ import { IFileSystemSize } from './models';
 
 export const add = createAction(
   '[FILE-SYSTEM] Add',
-  props<{ fs: IFileSystemSize[] }>(),
+  props<{ readonly fs: IFileSystemSize[] }>(),
 );

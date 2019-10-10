@@ -4,5 +4,5 @@ import { ICurrentLoad } from './models';
 
 export const add = createAction(
   '[CPU] Add',
-  props<{ cpu: ICurrentLoad }>(),
+  props<{ readonly cpu: ICurrentLoad }>(),
 );

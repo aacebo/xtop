@@ -6,6 +6,7 @@ import { SettingsModule } from './settings';
 import { MemoryModule } from './memory';
 import { CpuModule } from './cpu';
 import { FileSystemModule } from './file-system';
+import { NetworkInterfaceModule } from './network-interface';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { FileSystemModule } from './file-system';
     MemoryModule,
     CpuModule,
     FileSystemModule,
+    NetworkInterfaceModule,
   ],
 })
 export class ResourcesModule { }
